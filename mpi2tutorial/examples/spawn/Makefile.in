@@ -1,0 +1,33 @@
+all: all-redirect
+
+# ?= is a GNU make extension that means "set only if not set".  
+MPI_DIR = @MPI_DIR@
+MPICC   = @MPICC@
+MPIEXEC = @MPIEXEC@
+MPIEXEC_NP = @MPIEXEC_NP@
+
+EXECS = pcp-spawn-master pcp-spawn-slave
+all-redirect: $(EXECS)
+
+default: $(EXECS) 
+
+pcp-spawn-master: pcp-spawn-master.o
+	$(MPICC) -o $@ pcp-spawn-master.o
+
+pcp-spawn-slave: pcp-spawn-slave.o
+	$(MPICC) -o $@ pcp-spawn-slave.o
+
+.c.o:	$?
+	$(MPICC) -c $(?) -o $(@)
+
+clean::
+	rm -f *.o *~ pcp-spawn-master pcp-spawn-slave
+
+run: $(PROG)
+	$(MPIEXEC) $(MPIEXEC_NP) $(NP) $(PROG) pneofile
+
+# Enscript command:
+# enscript -1rC -E --color --style emacs -f "Helvetica16" \
+# -F "Helvetica16" --header='File: $n||Page $% of $=' $(?) \
+# -o $(@)
+

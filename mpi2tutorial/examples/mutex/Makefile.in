@@ -1,0 +1,32 @@
+all: all-redirect
+
+MPI_DIR = @MPI_DIR@
+# Some systems may want to add -static to the MPICC line
+MPICC   = @MPICC@
+MPIF77  = @MPIF77@
+MPIEXEC = @MPIEXEC@
+MPIEXEC_NP = @MPIEXEC_NP@
+
+# _XOPEN_SOURCE ensures that drand48 and friends are defined in stdlib.h
+#CFLAGS+= -g -O0 -Wall -D_XOPEN_SOURCE -D_POSIX_C_SOURCE=199506L
+CFLAGS = @CFLAGS@
+
+STDOBJS= 
+MPIOBJS= 
+
+.c.o:	$?
+	$(MPICC) $(CFLAGS) -c $(?) -o $(@)
+.f.o:   $?
+	$(MPIF77) $(FFLAGS) -c $(?) -o $(@)
+
+EXECS = 
+
+default:
+
+all-redirect: $(EXECS)
+
+clean::
+	rm -f *.o *.ps *.pdf *.exe *.stackdump
+
+run: $(PROG)
+	$(MPIEXEC) -n $(NP) $(PROG) $(ARGS)

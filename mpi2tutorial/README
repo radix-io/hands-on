@@ -1,0 +1,23 @@
+This directory contains the example programs for the MPI-2 tutorial, covering
+parallel I/O and remote memory operations.
+
+To build the tests, you can either edit the Makefiles in the example
+directories (such as examples/life/Makefile) or use the configure
+script to create the Makefiles.  If you use configure, use it like
+this
+
+./configure --with-mpi=path-to-dir-containing-mpicc
+
+For example, if you have installed mpich2 into /usr/local/mpich2, with
+the compilation script mpicc in /usr/local/mpich2/bin, then use
+
+./configure --with-mpi=/usr/local/mpich2/bin
+
+If your MPI doesn't use mpicc to compile MPI program, then either edit
+the Makefiles directly or create simple versions of mpicc as scripts
+that convert to the compilation form that your system requires.
+
+The default make target will build the example programs.
+
+The make target "notes" will create PDF versions of the programs
+suitable for use in the tutorial.

@@ -1,0 +1,17 @@
+#!/bin/bash
+#COBALT -n 4
+#COBALT -t 15
+#COBALT --mode script
+#COBALT -A ATPESC2017
+#COBALT -q training
+
+# make sure scratch dir exists
+mkdir -p /projects/ATPESC2017/$USER
+# set striping parameters to use all servers
+lfs setstripe -c -1 /projects/ATPESC2017/$USER
+
+# delete old file if present
+rm -rf /projects/ATPESC2017/$USER/warpdriveA
+
+# submit job
+aprun -n 256 -N 64 ./warpdriveA /projects/ATPESC2017/$USER/

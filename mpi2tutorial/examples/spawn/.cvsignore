@@ -1,0 +1,5 @@
+*.o
+pcp-spawn-master
+pcp-spawn-slave
+*.ps
+*.pdf
