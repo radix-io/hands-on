@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define NDIMS 2
-#define XDIM 5
-#define YDIM 1
+#include "array.h"
 
 static void handle_error(int errcode, char *str)
 {
@@ -33,7 +31,7 @@ void buffer_destroy(int *buffer)
     free(buffer);
 }
 
-int write_data(MPI_Comm comm, char *filename)
+int array_dump(MPI_Comm comm, char *filename)
 {
     MPI_File fh;
     MPI_Info info;
