@@ -16,15 +16,7 @@ The attendees are required to have a laptop with a working web browser and
 SSH client. For the purpose of this tutorial, all exercises can be performed
 via an SSH terminal.
 
-## Darshan exercises
-
-The Darshan hands-on exercises are all to be performed on the Theta
-supercomputer (https://www.alcf.anl.gov/theta).  Please use the `ATPESC2017`
-project and `training` queue for job submissions and the 
-`/projects/ATPESC2017` directory for data storage if you modify the exercise
-scripts or try your own examples.
-
-### Initial setup
+## Initial setup
 
 * Confirm account access if you haven't already (see presenters for
 details)
@@ -44,6 +36,14 @@ attendees to present their findings informally for discussion.
 See instructions below in [Running hands on example programs](
 https://xgitlab.cels.anl.gov/ATPESC-IO/hands-on-2017#running-hands-on-example-programs) section for information
 about how to compile and submit the example programs.
+
+## Darshan exercises
+
+The Darshan hands-on exercises are all to be performed on the Theta
+supercomputer (https://www.alcf.anl.gov/theta).  Please use the `ATPESC2017`
+project and `training` queue for job submissions and the 
+`/projects/ATPESC2017` directory for data storage if you modify the exercise
+scripts or try your own examples.
 
 ### Hands-on exercise: warpdrive
 
