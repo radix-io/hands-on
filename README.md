@@ -4,7 +4,6 @@
 - [Darshan](#darshan-exercises)
 - [Parallel-NetCDF](#parallel-netcdf)
 - [Game of Life](#game-of-life)
-- [Burst Buffers](#burst-buffers)
 - [Globus](#globus)
 
 Please feel free to use the hands-on time to improve your own applications or
@@ -161,3 +160,34 @@ To give you an idea of how big a problem size to use, here are some run times fo
 * Write an MLIFEIO implementation that uses HDF5
 * Experiment with Lustre stripe sizes on Theta.  When is a stripe width of 1 a
    good idea?
+
+## Globus 
+
+The Globus hands-on exercise demonstrates how to retrieve a file from a
+Globus endpoint.  If you retrieve the file correctly, you can decode it to
+receive a secret message!
+
+### Create an Globus account
+
+* Go to https://www.globus.org and click the "Login" button in the upper
+  right hand corner
+* Sign into Globus using either
+    * An institutional login (you can select "Argonne LCF" to login using an
+      ALCF cryptocard)
+    * A Google account
+    * An Orcid
+* Once you log in, you will have a "Transfer files" screen
+* Click on the "Endpoint" box on the left side of the transfer
+    * In the search dialog, look for the "ESnet Read-Only Test DTN at Sunnyvale"
+      endpoint and select it
+* Click on the "Endpoint" box on the right side of the transfer
+    * In the search dialog, look for the "alcf#dtn\_theta" endpoint and
+      select it
+* You are now ready to transfer a file from Sunnyvale to your home directory
+  on Theta!
+* Click on the "1M.dat" file on the left side (ESnet Sunnyvale)
+* Click on the blue arrow to transfer it to the right side (ALCF Theta)
+* Once the file has transfered, log into Theta and run
+  `hands-on/globus/globus-decoder.sh 1M.dat` to decode a secret message, and
+  let your instructors know if you find it!
+
