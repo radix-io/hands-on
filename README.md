@@ -191,3 +191,8 @@ receive a secret message!
   `hands-on/globus/globus-decoder.sh 1M.dat` to decode a secret message, and
   let your instructors know if you find it!
 
+Note that this is just a basic demonstration of how easy it is to transfer
+files with Globus.  For small files like this one you could have just as
+easily used scp.  For larger data sets, Globus online gives you a number of
+additional features and far higher performance.  See the ATPESC 2018 "Data
+Management Tools" presentation for details.
