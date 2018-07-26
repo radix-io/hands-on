@@ -1,27 +1,45 @@
-MPI=/usr
+# change these three according to your environment, or load apropriate
+# modules(1)
 PNETCDF=/usr
-CC=${MPI}/bin/mpicc
+MPICC=mpicc
+
+CC=gcc
 CPPFLAGS=-I${PNETCDF}/include
+# for generating slides
 CTORTF=../mpi2tutorial/maint/ctortf
-#LDFLAGS=-L${PNETCDF}/lib
-#LDLIBS=-lpnetcdf
 
-all: array array-pnetcdf
+PROGRAMS=1-description 2-posix 3-master 5-array-mpiio-write 6-array-mpiio-write-read 7-array-pnetcdf-write 8-array-pnetcdf-write-read
 
-examples: 1-description.rtf 2-posix.rtf 3-master.rtf array.rtf mpi-util.rtf
+all: $(PROGRAMS)
 
-array: array.o
+examples: array.rtf mpi-util.rtf \
+	1-description.rtf 2-posix.rtf 3-master.rtf \
+	5-array-mpiio-write.rtf 6-array-mpiio-write-read.rtf \
+	7-array-pnetcdf-write.rtf 8-array-pnetcdf-write-read.rtf
 
-array-pnetcdf: array-pnetcdf.o
 
 1-description: 1-description.o
 
 2-posix: 2-posix.o util.o
 
-3-master: 3-master.o util.o
+3-master: 3-master.c util.o
+	$(MPICC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
+
+5-array-mpiio-write: 5-array-mpiio-write.c util.o
+	$(MPICC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
+
+6-array-mpiio-write-read: 6-array-mpiio-write-read.c util.o
+	$(MPICC)  $(CFLAGS) $(CPPFLAGS) $^ -o $@
+
+7-array-pnetcdf-write: 7-array-pnetcdf-write.c util.o
+	$(MPICC) $(CFLAGS) $(CPPFLAGS) -I${PNETCDF}/include $^ -o $@ -L${PNETCDF}/lib -lpnetcdf
+
+8-array-pnetcdf-write-read: 8-array-pnetcdf-write-read.c util.o
+	$(MPICC) $(CFLAGS) $(CPPFLAGS) -I${PNETCDF}/include $^ -o $@ -L${PNETCDF}/lib -lpnetcdf
 
 clean:
-	rm -f *.o 1-description 1-description 2-posix 3-master *.rtf
+	rm -f *.o *.rtf *.nc\
+		$(PROGRAMS)
 
 # OK to ignore: used to generate syntax-highlighted code fragments for
 # presentation

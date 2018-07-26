@@ -3,52 +3,41 @@
 #include <stdio.h>
 
 #include "array.h"
+#include "util.h"
+#include "mpi-util.h"
 
-static void handle_error(int errcode, char *str)
-{
-    char msg[MPI_MAX_ERROR_STRING];
-    int resultlen;
-    MPI_Error_string(errcode, msg, &resultlen);
-    fprintf(stderr, "%s: %s\n", str, msg);
-    //MPI_Abort(MPI_COMM_WORLD, 1);
-}
-#define MPI_CHECK(fn) { int errcode; errcode = (fn); if (errcode != MPI_SUCCESS) handle_error(errcode, #fn ); }
-
-int * buffer_create(int seed, int x, int y)
-{
-    int i;
-    int *buffer = malloc(x*y*sizeof(int));
-    for (i=0; i<x*y; i++)
-    {
-        buffer[i] = seed*10+i;
-    }
-    return buffer;
-
-}
-
-void buffer_destroy(int *buffer)
-{
-    free(buffer);
-}
-
-int array_dump(MPI_Comm comm, char *filename)
+int write_data(MPI_Comm comm, char *filename)
 {
     MPI_File fh;
     MPI_Info info;
-    int *data;
-    int rank;
+    int *values;
+    int rank, nprocs;
+    science header;
+
 
     MPI_Info_create(&info);
 
     MPI_Comm_rank(comm, &rank);
+    MPI_Comm_size(comm, &nprocs);
 
-    MPI_CHECK(MPI_File_open(comm, filename, MPI_MODE_CREATE|MPI_MODE_WRONLY, info, &fh));
+    MPI_CHECK(MPI_File_open(comm, filename,
+                MPI_MODE_CREATE|MPI_MODE_WRONLY, info, &fh));
 
-    data = buffer_create(rank, XDIM, YDIM);
+    values = buffer_create(rank, XDIM, YDIM);
+    header.row = nprocs*YDIM;
+    header.col = XDIM;
+    header.iter = 1;
 
-    MPI_CHECK(MPI_File_set_view(fh, 0, MPI_INT, MPI_INT, "native", info));
-    MPI_CHECK(MPI_File_write_at_all(fh, rank*XDIM*YDIM, data, XDIM*YDIM,
-                MPI_INT, MPI_STATUS_IGNORE));
+    if (rank == 0) {
+        MPI_CHECK(MPI_File_write(fh,
+                    &header, sizeof(header), MPI_BYTE,
+                    MPI_STATUS_IGNORE) );
+    }
+    MPI_CHECK(MPI_File_set_view(fh, sizeof(header),
+                MPI_INT, MPI_INT, "native", info));
+    MPI_CHECK(MPI_File_write_at_all(fh, rank*XDIM*YDIM,
+            values, XDIM*YDIM, MPI_INT,
+            MPI_STATUS_IGNORE));
     MPI_CHECK(MPI_File_close(&fh));
 
     MPI_Info_free(&info);
@@ -65,6 +54,7 @@ int read_data(MPI_Comm comm, char *filename)
     MPI_Datatype subarray;
     int sizes[NDIMS], sub[NDIMS], starts[NDIMS];
     int i;
+    science header;
 
     MPI_Comm_size(comm, &nprocs);
     MPI_Comm_rank(comm, &rank);
@@ -94,7 +84,13 @@ int read_data(MPI_Comm comm, char *filename)
     MPI_Type_commit(&subarray);
 
     MPI_CHECK(MPI_File_open(comm, filename, MPI_MODE_RDONLY, info, &fh));
-    MPI_CHECK(MPI_File_set_view(fh, 0, MPI_INT, subarray, "native", info));
+    if (!rank) {
+        MPI_CHECK(MPI_File_read(fh,
+                    &header, sizeof(header), MPI_BYTE,
+                    MPI_STATUS_IGNORE) );
+    }
+    MPI_CHECK(MPI_File_set_view(fh, sizeof(header),
+                MPI_INT, subarray, "native", info));
     MPI_Type_free(&subarray);
     MPI_CHECK(MPI_File_read_all(fh, read_buf, nprocs, MPI_INT, MPI_STATUS_IGNORE));
 
@@ -102,6 +98,8 @@ int read_data(MPI_Comm comm, char *filename)
     MPI_Info_free(&info);
 
     if (!rank) {
+        printf("array is %d by %d ; experiment on iteration %d\n",
+                header.row, header.col, header.iter);
         for (i=0; i<nprocs; i++)
             printf("%d ", read_buf[i]);
     }
@@ -125,4 +123,5 @@ int main(int argc, char **argv)
     read_data(MPI_COMM_WORLD, argv[1]);
 
     MPI_Finalize();
+    return ret;
 }
