@@ -1,6 +1,8 @@
 # ATPESC 2018 hands-on I/O exercises and reference material
 
 # Table of Contents:
+- [Initial setup](#initial-setup)
+- [Array](#array)
 - [Darshan](#darshan-exercises)
 - [Parallel-NetCDF](#parallel-netcdf)
 - [Game of Life](#game-of-life)
@@ -35,6 +37,14 @@ attendees to present their findings informally for discussion.
 See instructions below in [Running hands on example programs](
 https://xgitlab.cels.anl.gov/ATPESC-IO/hands-on-2017#running-hands-on-example-programs) section for information
 about how to compile and submit the example programs.
+
+## Array
+
+The presentation will walk you through several interfaces for writing an array
+to a file.  We have provided you with some skeleton code which you can build
+upon during the lecture.  If you get stuck you can find complete examples in
+the `solutions` directory.
+
 
 ## Darshan exercises
 
