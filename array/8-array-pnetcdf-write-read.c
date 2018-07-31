@@ -121,8 +121,8 @@ int read_data(MPI_Comm comm, char *filename)
 
         for (i=0; i<nprocs; i++)
             printf("%d ", read_buf[i]);
+	printf("\n");
     }
-    printf("\n");
 
     free(read_buf);
     return 0;
