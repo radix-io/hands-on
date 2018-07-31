@@ -19,6 +19,8 @@ via an SSH terminal.
 
 ## Initial setup
 
+The burst buffer hands-on exercises can be performed on the Cori system at NERSC.  The rest are intended for use on the Theta system at the ALCF.  See instructions below for setting up your Theta environment.
+
 * Confirm account access if you haven't already (see presenters for
 details)
 * Log on to Theta
@@ -29,6 +31,12 @@ details)
   * `cd hands-on
 * Set up your environment to have access to the utilities needed for the hands-on exercises
   * `source ./setup-env.sh`
+
+Please use the `ATPESC2018` project and either the `atpesc_morning`
+or `atpesc_night` queue (depending on whether we are in the day or
+evening portion of the course) for job submissions.  You can also use
+the `/projects/ATPESC2018` directory for data storage if you modify the
+exercise scripts or try your own examples.
 
 Please ask your instructors if you have questions or need assistance. Two
 exercises are described below.  
@@ -47,11 +55,6 @@ the `solutions` directory.
 
 ## Darshan exercises
 
-The Darshan hands-on exercises are all to be performed on the Theta
-supercomputer (https://www.alcf.anl.gov/theta).  Please use the `ATPESC2017`
-project and `training` queue for job submissions and the 
-`/projects/ATPESC2017` directory for data storage if you modify the exercise
-scripts or try your own examples.
 
 ### Hands-on exercise: warpdrive
 
@@ -76,7 +79,7 @@ details on example programs)
   * `qsub ./<exampleprogram>.qsub`
 * Check the queue to see when your jobs complete
   * `qstat |grep <username>`
-* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2017/8/4/<username>*`
+* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2018/8/3/<username>*`
   * Copy log files to your home directory
 * Use `darshan-job-summary.pl` or `darshan-parser` to investigate Darshan
 characterization data
