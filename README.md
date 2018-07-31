@@ -55,6 +55,20 @@ the `solutions` directory.
 
 ## Darshan exercises
 
+### Running hands-on example programs
+
+* Compile example programs and submit into the job queue (see below for
+details on specific example programs)
+  * `cc <exampleprogram>.c -o <exampleprogram>`
+  * `qsub ./<exampleprogram>.qsub`
+* Check the queue to see when your jobs complete
+  * `qstat |grep <username>`
+* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2018/8/3/<username>*`
+  * Copy log files to your home directory
+* Use `darshan-job-summary.pl` or `darshan-parser` to investigate Darshan
+characterization data
+  * darshan-job-summary.pl will produce \*.pdf files with an analysis summary.
+  * You can use scp to copy these to your laptop to view them, or run `evince *.pdf` on Theta to display them remotely over your ssh session it forwards X connections.
 
 ### Hands-on exercise: warpdrive
 
@@ -70,22 +84,6 @@ The hands-on material includes an example application called
 fidgetspinnerA and fidgetspinnerB.  Both of them do the same amount of
 I/O from each process, but one of them performs better than the other.
 Which one has the fastest I/O?  Why?
-
-### Running hands-on example programs
-
-* Compile example programs and submit into the job queue (see below for
-details on example programs)
-  * `cc <exampleprogram>.c -o <exampleprogram>`
-  * `qsub ./<exampleprogram>.qsub`
-* Check the queue to see when your jobs complete
-  * `qstat |grep <username>`
-* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2018/8/3/<username>*`
-  * Copy log files to your home directory
-* Use `darshan-job-summary.pl` or `darshan-parser` to investigate Darshan
-characterization data
-  * darshan-job-summary.pl will produce \*.pdf files with an analysis summary.
-  * You can use scp to copy these to your laptop to view them, or run `evince *.pdf` on Theta to display them remotely over your ssh session it forwards X connections.
-
 
 ## Parallel-NetCDF
 
