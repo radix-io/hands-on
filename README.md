@@ -23,19 +23,18 @@ via an SSH terminal.
 details)
 * Log on to Theta
 * Download the tutorial materials to your home directory
-  * `mkdir atpesc2017-io`
-  * `cd atpesc2017-io`
-  * `git clone https://xgitlab.cels.anl.gov/ATPESC-IO/hands-on-2017.git`
-  * `cd hands-on-2017`
-* Set up your environment to be able to run Darshan utilities
+  * `mkdir atpesc-io`
+  * `cd atpesc-io`
+  * `git clone https://xgitlab.cels.anl.gov/ATPESC-IO/hands-on.git`
+  * `cd hands-on
+* Set up your environment to have access to the utilities needed for the hands-on exercises
   * `source ./setup-env.sh`
 
 Please ask your instructors if you have questions or need assistance. Two
-exercises are described below.  Near the end of the session we will invite
-attendees to present their findings informally for discussion.
+exercises are described below.  
 
 See instructions below in [Running hands on example programs](
-https://xgitlab.cels.anl.gov/ATPESC-IO/hands-on-2017#running-hands-on-example-programs) section for information
+https://xgitlab.cels.anl.gov/ATPESC-IO/hands-on#running-hands-on-example-programs) section for information
 about how to compile and submit the example programs.
 
 ## Array
