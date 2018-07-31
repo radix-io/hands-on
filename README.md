@@ -32,9 +32,7 @@ details)
 * Set up your environment to have access to the utilities needed for the hands-on exercises
   * `source ./setup-env.sh`
 
-Please use the `ATPESC2018` project and either the `atpesc_morning`
-or `atpesc_night` queue (depending on whether we are in the day or
-evening portion of the course) for job submissions.  You can also use
+Please use the `ATPESC2018` project and `training` queue for job submissions.  You can also use
 the `/projects/ATPESC2018` directory for data storage if you modify the
 exercise scripts or try your own examples.
 

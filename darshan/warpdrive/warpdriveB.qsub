@@ -3,7 +3,7 @@
 #COBALT -t 15
 #COBALT --mode script
 #COBALT -A ATPESC2018
-#COBALT -q atpesc_morning
+#COBALT -q training
 
 # make sure scratch dir exists
 mkdir -p /projects/ATPESC2018/$USER
