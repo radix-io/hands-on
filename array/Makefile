@@ -1,9 +1,9 @@
 # change these three according to your environment, or load apropriate
 # modules(1)
 PNETCDF=/usr
-MPICC=mpicc
+MPICC=cc
 
-CC=gcc
+CC=cc
 CPPFLAGS=-I${PNETCDF}/include
 # for generating slides
 CTORTF=../mpi2tutorial/maint/ctortf
