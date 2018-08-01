@@ -61,7 +61,7 @@ details on specific example programs)
   * `qsub ./<exampleprogram>.qsub`
 * Check the queue to see when your jobs complete
   * `qstat |grep <username>`
-* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2018/8/3/<username>*`
+* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2018/8/3/<username>*` or `/lus/theta-fs0/logs/darshan/theta/2018/8/4/<username>*`
   * Copy log files to your home directory
 * Use `darshan-job-summary.pl` or `darshan-parser` to investigate Darshan
 characterization data
