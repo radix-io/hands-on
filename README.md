@@ -3,6 +3,7 @@
 # Table of Contents:
 - [Initial setup](#initial-setup)
 - [Array](#array)
+- [Variance](#variance)
 - [Darshan](#darshan)
 - [Parallel-NetCDF](#parallel-netcdf)
 - [Game of Life](#game-of-life)
