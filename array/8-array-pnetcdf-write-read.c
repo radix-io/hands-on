@@ -6,8 +6,7 @@
 #include "util.h"
 #include <string.h>
 #include <pnetcdf.h>
-
-#define NC_CHECK(status) { int nc_status = status; if (nc_status != NC_NOERR) perror(ncmpi_strerror(nc_status)); }
+#include "pnetcdf-util.h"
 
 
 int write_data(MPI_Comm comm, char *filename)
