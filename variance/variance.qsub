@@ -1,0 +1,21 @@
+#!/bin/bash
+#COBALT -n 4
+#COBALT -t 20
+#COBALT --mode script
+#COBALT -A ATPESC2018
+#COBALT -q training
+
+# make sure scratch dir exists
+for i in `seq 1 5`; do
+    mkdir -p /projects/ATPESC2018/$USER/$i
+done
+
+# delete old file if present
+for i in `seq 1 5`; do
+    rm -rf /projects/ATPESC2018/$USER/$i/variance*
+done
+
+# submit job
+for i in `seq 1 5`; do
+    aprun -n 256 -N 64 ./variance /projects/ATPESC2018/$USER/$i
+done
