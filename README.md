@@ -3,7 +3,7 @@
 # Table of Contents:
 - [Initial setup](#initial-setup)
 - [Array](#array)
-- [Darshan](#darshan-exercises)
+- [Darshan](#darshan)
 - [Parallel-NetCDF](#parallel-netcdf)
 - [Game of Life](#game-of-life)
 - [Globus](#globus)
@@ -50,8 +50,21 @@ to a file.  We have provided you with some skeleton code which you can build
 upon during the lecture.  If you get stuck you can find complete examples in
 the `solutions` directory.
 
+## Variance
 
-## Darshan exercises
+The variance subdirectory contains a hands-on example to illustrate the kind of variance you can expect from each job run in terms of I/O performance.  To execute it:
+
+* `cc variance.c -o variance`
+* `qsub variance.qsub`
+
+If you look in variance.qsub you will see that the job is a script job that executes the same program 5 times.  Each will display the elapsed time of the I/O routine.
+
+* What was the slowest time?
+* What was the fastest time?
+* What was the average time?
+* This is a small example program.  Do you think the variance will improve or get worse with a larger example?  What strategies might help improve performance in the example code?
+
+## Darshan
 
 ### Running hands-on example programs
 
