@@ -18,7 +18,8 @@ all: $(PROGRAMS)
 examples: array.rtf mpi-util.rtf \
 	1-description.rtf 2-posix.rtf 3-master.rtf \
 	5-array-mpiio-write.rtf 6-array-mpiio-write-read.rtf \
-	7-array-pnetcdf-write.rtf 8-array-pnetcdf-write-read.rtf
+	7-array-pnetcdf-write.rtf 8-array-pnetcdf-write-read.rtf \
+	9-array-pnetcdf-op-combine.rtf
 
 
 1-description: 1-description.o
