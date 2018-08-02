@@ -12,4 +12,4 @@ mkdir -p /projects/ATPESC2018/$USER
 rm -rf /projects/ATPESC2018/$USER/fidgetspinnerA*
 
 # submit job
-aprun -n 256 -N 64 ./fidgetspinnerA /projects/ATPESC2018/$USER/
+aprun -n 128 -N 32 ./fidgetspinnerA /projects/ATPESC2018/$USER/
