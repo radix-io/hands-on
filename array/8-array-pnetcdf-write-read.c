@@ -92,9 +92,10 @@ int read_data(MPI_Comm comm, char *filename)
 
 
     NC_CHECK(ncmpi_open(comm, filename, NC_NOWRITE, info, &ncfile));
-    /* not necessary: could just read the first variable out of the file.
-     * however, "inq_var" will let us sanity-check that the variable we are
-     * reading is what we expect */
+    /* While we can assume a convention of a 2d variable in this example,
+     * "inq_var" still provides the dimension id array (dim_ids) as well as a
+     * bunch of other information about the variable we can use to sanity-check
+     * that the variable we are reading is what we expect */
     NC_CHECK(ncmpi_inq_var(ncfile, 0, varname, &vartype, &nr_dims, dim_ids,
                 &nr_attrs));
     if (nr_dims != NDIMS || strncmp(varname, "array", strlen("array") != 0))
@@ -107,6 +108,10 @@ int read_data(MPI_Comm comm, char *filename)
     NC_CHECK(ncmpi_get_att_int(ncfile, 0,
                 "iteration", &iterations));
 
+    /* read a single column (count[1] = 1).
+     * The column is nprocs tall (count[0] = nprocs
+     * start reading from the first row (starts[0] = 0
+     * and pick the column in the middle (starts[1] = XDIM/2) */
     count[0] = nprocs; count[1] = 1;
     starts[0] = 0;     starts[1] = XDIM/2;
     NC_CHECK(ncmpi_get_vara_int_all(ncfile, 0, starts, count, read_buf));
