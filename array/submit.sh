@@ -11,6 +11,9 @@ export n_openmp_threads_per_rank=4
 export n_hyperthreads_per_core=2
 export n_hyperthreads_skipped_between_ranks=4
 
+# '.' in path not best practice but will save a few headaches
+export PATH=.:${PATH}
+
 APPLICATION=$1
 
 TRAINING_DIR=/lus/theta-fs0/projects/ATPESC2018/data-and-io/$USER
