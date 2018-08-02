@@ -36,8 +36,9 @@ int write_data(MPI_Comm comm, char *filename)
 
     NC_CHECK(ncmpi_def_var(ncfile, "array", NC_INT, NDIMS, dims,
                 &varid_array));
-    NC_CHECK(ncmpi_def_var(ncfile, "other array", NC_INT, NDIMS, dims,
-		&varid_other));
+
+    /* HANDS-ON: define a second variable, same as the first, just changing the
+     * name to "other array" */
 
     iterations=1;
     NC_CHECK(ncmpi_put_att_int(ncfile, varid_array,
@@ -50,13 +51,13 @@ int write_data(MPI_Comm comm, char *filename)
 
     start[0] = rank*YDIM; start[1] = 0;
     count[0] = YDIM; count[1] = XDIM;
-    NC_CHECK(ncmpi_iput_vara_int(ncfile, varid_array, start, count,
-                values, &(reqs[0]) ) );
-    NC_CHECK(ncmpi_iput_vara_int(ncfile, varid_other, start, count,
-                values, &(reqs[1]) ) );
+    /* HANDS-ON: use the 'ncmpi_iput_vara_int' to write.  Write the same data
+     * to both variables */
 
     /* all the I/O actually happens here */
-    NC_CHECK(ncmpi_wait_all(ncfile, 2, reqs, status));
+    /* HANDS-ON: use ncmpi_wait_all to complete the operations */
+
+
     NC_CHECK(ncmpi_close(ncfile));
 
     MPI_Info_free(&info);

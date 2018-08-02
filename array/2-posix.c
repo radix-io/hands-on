@@ -26,11 +26,9 @@ int write_data(char *filename)
     fd = open(filename, O_CREAT|O_WRONLY, S_IRUSR|S_IWUSR);
     if (fd < 0) goto fn_error;
 
-    ret = write(fd, &data, sizeof(data));
-    if (ret < 0) goto fn_error;
-
-    ret = write(fd, array, XDIM*YDIM*sizeof(int));
-    if (ret < 0) goto fn_error;
+    /* HANDS-ON: write our "array" data to a file, but also write some metadata
+     * so we know what is stored in the file.  The metadata is stored in the
+     * 'data' struct declared above */
 
     ret = close(fd);
     if (ret < 0) goto fn_error;

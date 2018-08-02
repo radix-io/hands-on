@@ -102,19 +102,19 @@ int read_data(MPI_Comm comm, char *filename)
         fprintf(stderr, "Error: unexpected variable %s of dim %d in file\n",
                 varname, nr_dims);
 
-    NC_CHECK(ncmpi_inq_dim(ncfile, dim_ids[0], NULL, &(dim_lens[0])) );
-    NC_CHECK(ncmpi_inq_dim(ncfile, dim_ids[1], NULL, &(dim_lens[1])) );
+    /* HANDS-ON: turn the identifiers in the 'dim_ids' array into dimension
+     * lengths */
 
-    NC_CHECK(ncmpi_get_att_int(ncfile, 0,
-                "iteration", &iterations));
+    /* HANDS-ON:  read the "iteration" attribute from the "array" variable.
+     * We'll take a shortcut (convention) and know "array" is variable id '0'
+     */
 
-    /* read a single column (count[1] = 1).
-     * The column is nprocs tall (count[0] = nprocs
-     * start reading from the first row (starts[0] = 0
-     * and pick the column in the middle (starts[1] = XDIM/2) */
-    count[0] = nprocs; count[1] = 1;
-    starts[0] = 0;     starts[1] = XDIM/2;
-    NC_CHECK(ncmpi_get_vara_int_all(ncfile, 0, starts, count, read_buf));
+    /* HANDS-ON:
+     * read a single column (count[1] = 1).
+     * The column is nprocs tall (count[0] = nprocs)
+     * start reading from the first row (starts[0] = 0 )
+     * and pick the column in the middle (starts[1] = XDIM/2).
+     * ncmpi_get_var_int_all will read collectively into 'read_buf' */
 
     NC_CHECK(ncmpi_close(ncfile));
     MPI_Info_free(&info);

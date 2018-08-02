@@ -20,6 +20,10 @@ int write_data(MPI_Comm comm, char *filename)
     MPI_Comm_rank(comm, &rank);
     MPI_Comm_size(comm, &nprocs);
 
+    /* 'MPI_CHECK' is defined in mpi-util.h and will report any error that
+     * happens -- like if you try to write to a directory that does not exist
+     * or do not provide a file name.  You know, things that this author has
+     * *cough* never accidentally done before */
     MPI_CHECK(MPI_File_open(comm, filename,
                 MPI_MODE_CREATE|MPI_MODE_WRONLY, info, &fh));
 
@@ -28,16 +32,15 @@ int write_data(MPI_Comm comm, char *filename)
     header.col = XDIM;
     header.iter = 1;
 
-    if (rank == 0) {
-        MPI_CHECK(MPI_File_write(fh,
-                    &header, sizeof(header), MPI_BYTE,
-                    MPI_STATUS_IGNORE) );
-    }
+    /* HANDS-ON: make rank 0 write the metadata */
+
+    /* I've provided the call to MPI_File_set_view for you */
     MPI_CHECK(MPI_File_set_view(fh, sizeof(header),
                 MPI_INT, MPI_INT, "native", info));
-    MPI_CHECK(MPI_File_write_at_all(fh, rank*XDIM*YDIM,
-            values, XDIM*YDIM, MPI_INT,
-            MPI_STATUS_IGNORE));
+
+    /* HANDS-ON: Invoke MPI_File_write_at_all so every process can collectively
+     * write their array. */
+
     MPI_CHECK(MPI_File_close(&fh));
 
     MPI_Info_free(&info);

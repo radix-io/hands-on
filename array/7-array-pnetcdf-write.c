@@ -26,26 +26,27 @@ int write_data(MPI_Comm comm, char *filename)
 
     NC_CHECK(ncmpi_create(comm, filename, NC_CLOBBER, info, &ncfile));
 
-    /* row-major ordering */
-    NC_CHECK(ncmpi_def_dim(ncfile, "rows", YDIM*nprocs, &(dims[0])) );
-    NC_CHECK(ncmpi_def_dim(ncfile, "elements", XDIM, &(dims[1])) );
+    /* HANDS-ON: define two dimensions.  Call one "rows" and the other
+     * "elements" .  You will need to pass an array of identifiers when you
+     * associate these dimensions with a variable: saves you a step if you pass
+     * that array when you define dimension */
 
-    NC_CHECK(ncmpi_def_var(ncfile, "array", NC_INT, NDIMS, dims,
-                &varid_array));
+    /* HANDS-ON: define one variable, "array".  It has NDIMS dimensions. the
+     * type is NC_INT */
 
     iterations=1;
     NC_CHECK(ncmpi_put_att_int(ncfile, varid_array,
                 "iteration", NC_INT, 1, &iterations));
 
+    /* Extra credit: what happens if you remove this line? */
     NC_CHECK(ncmpi_enddef(ncfile));
 
     values = buffer_create(rank, XDIM, YDIM);
 
 
-    start[0] = rank*YDIM; start[1] = 0;
-    count[0] = YDIM; count[1] = XDIM;
-    NC_CHECK(ncmpi_put_vara_int_all(ncfile, varid_array, start, count,
-                values) );
+    /* HANDS-ON: each process will write a subarray of the overall global
+     * array.  call ncmpi_put_vara_int_all to write the process-local data to
+     * the correct global location collectively */
 
     NC_CHECK(ncmpi_close(ncfile));
 

@@ -72,27 +72,31 @@ int read_data(MPI_Comm comm, char *filename)
      * The last collumn would be a "subsize" of 3,1
      * And a "start" of 0,5 */
 
-    sizes[0] = nprocs;
-    sizes[1] = XDIM;
-    sub[0] = nprocs;
-    sub[1] = 1;
-    starts[0] = 0;
-    starts[1] = XDIM/2;
+    /* HANDS-ON: create a datatype with MPI_Type_create_subarray.  The size of
+     * the array is {nprocs, XDIM}".  The subarray size is "{nprocs,1}".  The
+     * starting coordinates are "{0, XDIM/2}".
+     *
+     * Use MPI_ORDER_C and the underlying type will be MPI_INT */
 
-    MPI_Type_create_subarray(NDIMS, sizes, sub, starts, MPI_ORDER_C, MPI_INT,
-            &subarray);
     MPI_Type_commit(&subarray);
 
     MPI_CHECK(MPI_File_open(comm, filename, MPI_MODE_RDONLY, info, &fh));
+
+    /* Here's how rank 0 reads the metadata */
     if (!rank) {
         MPI_CHECK(MPI_File_read(fh,
                     &header, sizeof(header), MPI_BYTE,
                     MPI_STATUS_IGNORE) );
     }
-    MPI_CHECK(MPI_File_set_view(fh, sizeof(header),
-                MPI_INT, subarray, "native", info));
+
+    /* HANDS-ON: set the file view with the type you created above.  You should
+     * skip over the header -- it is "sizeof(header)" bytes big. */
+
     MPI_Type_free(&subarray);
-    MPI_CHECK(MPI_File_read_all(fh, read_buf, nprocs, MPI_INT, MPI_STATUS_IGNORE));
+
+    /* HANDS-ON: collectively read with MPI_File_read_all.  How much data
+     * should you read?  'read_buf' was allocated above and holds 'nprocs'
+     * integers (MPI_INT) .  It's ok to use MPI_STATUS_IGNORE */
 
     MPI_CHECK(MPI_File_close(&fh));
     MPI_Info_free(&info);

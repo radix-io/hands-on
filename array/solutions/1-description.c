@@ -3,7 +3,19 @@
 
 int main()
 {
+    /* MPI-friendly allocation: faster and easier to describe */
     int *array;
     array = malloc(XDIM*YDIM*sizeof(*array));
+
+    /* not MPI-friendly: describing this memory region will require a more
+     * complictaed data type description */
+    int **annoying;
+    annoying = malloc(YDIM*sizeof(*array));
+    for (int i=0; i<YDIM; i++)
+        annoying[i] = malloc(XDIM*sizeof(*array));
+
+    free(array);
+    free(annoying);
+
     return 0;
 }

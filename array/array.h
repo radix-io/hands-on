@@ -7,9 +7,8 @@
 
 
 typedef struct {
-    int row;
-    int col;
-    int iter;
+    /* HANDS-ON: declare a C struct describing a two dimensional array and
+     * which iteration of the experiment we are working on */
 } science;
 
 #endif

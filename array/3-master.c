@@ -29,31 +29,11 @@ int write_data(MPI_Comm comm, char *filename)
     /* and then sends it to rank 0  */
     int *buffer = malloc(XDIM*YDIM*nprocs*sizeof(int));
 
-    MPI_CHECK(MPI_Gather(/* sender (buffer,count,type) tuple */
-            array, XDIM*YDIM, MPI_INT,
-            /* receiver tuple */
-            buffer, XDIM*YDIM, MPI_INT,
-            /* who gathers and across which context */
-            0, comm));
+    /* HANDS-ON: gather all the array rows from every process to rank 0 */
 
-    if (rank == 0) {
-        fd = open(filename, O_CREAT|O_WRONLY, S_IRUSR|S_IWUSR);
-        if (fd < 0) goto fn_error;
+    /* HANDS-ON: have rank zero do the I/O.  Will look a lot like hands-on #2,
+     * except more data because rank 0 does all the work */
 
-        /* writing a global array, not just our local piece of it */
-        data.row = YDIM*nprocs;
-        data.col = XDIM;
-        data.iter = 1;
-
-        ret = write(fd, &data, sizeof(data));
-        if (ret < 0) goto fn_error;
-
-        ret = write(fd, buffer, XDIM*YDIM*nprocs*sizeof(int));
-        if (ret < 0) goto fn_error;
-
-        ret = close(fd);
-        if (ret < 0) goto fn_error;
-    }
 
     free(array);
     return ret;
