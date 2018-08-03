@@ -10,8 +10,9 @@ int main()
     /* not MPI-friendly: describing this memory region will require a more
      * complictaed data type description */
     int **annoying;
+    int i;
     annoying = malloc(YDIM*sizeof(*array));
-    for (int i=0; i<YDIM; i++)
+    for (i=0; i<YDIM; i++)
         annoying[i] = malloc(XDIM*sizeof(*array));
 
     free(array);
