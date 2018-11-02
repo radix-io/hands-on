@@ -43,6 +43,10 @@ examples: array.rtf mpi-util.rtf \
 9-array-pnetcdf-op-combine: 9-array-pnetcdf-op-combine.c util.o
 	$(MPICC) $(CFLAGS) $(CPPFLAGS) -I${PNETCDF}/include $^ -o $@ -L${PNETCDF}/lib -lpnetcdf
 
+10-array-pnetcdf-op-combine-compare: 10-array-pnetcdf-op-combine-compare.c util.o
+	$(MPICC) $(CFLAGS) $(CPPFLAGS) -I${PNETCDF}/include $^ -o 10-array-pnetcdf -L${PNETCDF}/lib -lpnetcdf
+	$(MPICC) $(CFLAGS) $(CPPFLAGS) -DOP_COMBINE -I${PNETCDF}/include $^ -o 10-array-pnetcdf-op-combine -L${PNETCDF}/lib -lpnetcdf
+
 clean:
 	rm -f *.o *.rtf *.nc $(PROGRAMS)
 
