@@ -37,6 +37,11 @@ h5par_ex2a: h5par_ex2a.c
 h5par_ex2b:  h5par_ex2b.c
 	$(MPICC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS) -lhdf5
 
+h5par-comparison:  h5par-comparison.c
+	$(MPICC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS) -lhdf5
+	$(MPICC) $(CFLAGS) $(CPPFLAGS) -DUSE_COLL_DATA $^ -o h5par-comparison-collio $(LDFLAGS) -lhdf5
+	$(MPICC) $(CFLAGS) $(CPPFLAGS) -DUSE_COLL_DATA -DUSE_COLL_MD $^ -o h5par-comparison-collmd $(LDFLAGS) -lhdf5
+
 clean:
 	rm -f *.o *.rtf *.nc $(PROGRAMS)
 
