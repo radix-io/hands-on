@@ -1,4 +1,4 @@
-# ATPESC 2018 hands-on I/O exercises and reference material
+# ATPESC 2019 hands-on I/O exercises and reference material
 
 # Table of Contents:
 - [Initial setup](#initial-setup)
@@ -33,8 +33,8 @@ details)
 * Set up your environment to have access to the utilities needed for the hands-on exercises
   * `source ./setup-env.sh`
 
-Please use the `ATPESC2018` project and `training` queue for job submissions.  You can also use
-the `/projects/ATPESC2018` directory for data storage if you modify the
+Please use the `ATPESC2019` project and `training` queue for job submissions.  You can also use
+the `/projects/ATPESC2019` directory for data storage if you modify the
 exercise scripts or try your own examples.
 
 Please ask your instructors if you have questions or need assistance. Two
@@ -75,7 +75,7 @@ details on specific example programs)
   * `qsub ./<exampleprogram>.qsub`
 * Check the queue to see when your jobs complete
   * `qstat |grep <username>`
-* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2018/8/3/<username>*` or `/lus/theta-fs0/logs/darshan/theta/2018/8/4/<username>*`
+* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2019/8/2/<username>*` or `/lus/theta-fs0/logs/darshan/theta/2019/8/3/<username>*`
   * Copy log files to your home directory
 * Use `darshan-job-summary.pl` or `darshan-parser` to investigate Darshan
 characterization data
@@ -216,5 +216,5 @@ receive a secret message!
 Note that this is just a basic demonstration of how easy it is to transfer
 files with Globus.  For small files like this one you could have just as
 easily used scp.  For larger data sets, Globus online gives you a number of
-additional features and far higher performance.  See the ATPESC 2018 "Data
+additional features and far higher performance.  See the ATPESC 2019 "Data
 Management Tools" presentation for details.
