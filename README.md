@@ -68,7 +68,19 @@ characterization data
   * darshan-job-summary.pl will produce \*.pdf files with an analysis summary.
   * You can use scp to copy these to your laptop to view them, or run `evince *.pdf` on Theta to display them remotely over your ssh session it forwards X connections.
 
+### Hands-on exercise: helloworld
+
+The hands-on material includes an example application called `helloworld`.
+Compile it, run it, and generate the Darshan job summary following the
+instructions above.  How many files did the application open?  How much data
+did it read, and how much data did it write?  What approximate I/O
+performance did it achieve?
+
 ### Hands-on exercise: warpdrive
+
+<span style="background-color: #FFFF00">NOTE: this exercise is best done
+some time after the MPI-IO and/or performance tuning presentations. It
+requires diagnosis of I/O performance problems to complete.</span>
 
 The hands-on material includes an example application called `warpdrive`.
 There are two versions of this application: warpdriveA and warpdriveB.  Both
@@ -76,6 +88,10 @@ of them do the same amount of I/O from each process, but one of them performs
 better than the other.  Which one has the fastest I/O?  Why?
 
 ### Hands-on exercise: fidgetspinner
+
+<span style="background-color: #FFFF00">NOTE: this exercise is best done
+some time after the MPI-IO and/or performance tuning presentations. It
+requires diagnosis of I/O performance problems to complete.</span>
 
 The hands-on material includes an example application called
 `fidgetspinner`.  There are two versions of this application:
