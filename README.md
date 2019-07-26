@@ -78,9 +78,9 @@ performance did it achieve?
 
 ### Hands-on exercise: warpdrive
 
-<span style="background-color: #FFFF00">NOTE: this exercise is best done
+_NOTE: this exercise is best done
 some time after the MPI-IO and/or performance tuning presentations. It
-requires diagnosis of I/O performance problems to complete.</span>
+requires diagnosis of I/O performance problems to complete._
 
 The hands-on material includes an example application called `warpdrive`.
 There are two versions of this application: warpdriveA and warpdriveB.  Both
@@ -89,9 +89,9 @@ better than the other.  Which one has the fastest I/O?  Why?
 
 ### Hands-on exercise: fidgetspinner
 
-<span style="background-color: #FFFF00">NOTE: this exercise is best done
+_NOTE: this exercise is best done
 some time after the MPI-IO and/or performance tuning presentations. It
-requires diagnosis of I/O performance problems to complete.</span>
+requires diagnosis of I/O performance problems to complete._
 
 The hands-on material includes an example application called
 `fidgetspinner`.  There are two versions of this application:
