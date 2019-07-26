@@ -3,12 +3,12 @@
 # Table of Contents:
 - [Reservation](#reservation)
 - [Initial setup](#initial-setup)
+- [Darshan](#darshan)
+- [Globus](#globus)
 - [Array](#array)
 - [Variance](#variance)
-- [Darshan](#darshan)
 - [Parallel-NetCDF](#parallel-netcdf)
 - [Game of Life](#game-of-life)
-- [Globus](#globus)
 
 Please feel free to use the hands-on time to improve your own applications or
 ask the presenters for I/O advice!  We are also providing structured,
@@ -48,33 +48,7 @@ Please use the `ATPESC2019` project and `training` queue for job submissions.  Y
 the `/projects/ATPESC2019` directory for data storage if you modify the
 exercise scripts or try your own examples.
 
-Please ask your instructors if you have questions or need assistance. Two
-exercises are described below.  
-
-See instructions below in [Running hands on example programs](
-https://xgitlab.cels.anl.gov/ATPESC-IO/hands-on#running-hands-on-example-programs) section for information
-about how to compile and submit the example programs.
-
-## Array
-
-The presentation will walk you through several interfaces for writing an array
-to a file.  We have provided you with some skeleton code which you can build
-upon during the lecture.  If you get stuck you can find complete examples in
-the `solutions` directory.
-
-## Variance
-
-The variance subdirectory contains a hands-on example to illustrate the kind of variance you can expect from each job run in terms of I/O performance.  To execute it:
-
-* `cc variance.c -o variance`
-* `qsub variance.qsub`
-
-If you look in variance.qsub you will see that the job is a script job that executes the same program 5 times.  Each will display the elapsed time of the I/O routine.
-
-* What was the slowest time?
-* What was the fastest time?
-* What was the average time?
-* This is a small example program.  Do you think the variance will improve or get worse with a larger example?  What strategies might help improve performance in the example code?
+Please ask your instructors if you have questions or need assistance.
 
 ## Darshan
 
@@ -107,6 +81,62 @@ The hands-on material includes an example application called
 fidgetspinnerA and fidgetspinnerB.  Both of them do the same amount of
 I/O from each process, but one of them performs better than the other.
 Which one has the fastest I/O?  Why?
+
+## Globus 
+
+The Globus hands-on exercise demonstrates how to retrieve a file from a
+Globus endpoint.  If you retrieve the file correctly, you can decode it to
+receive a secret message!
+
+### Create an Globus account
+
+* Go to https://www.globus.org and click the "Login" button in the upper
+  right hand corner
+* Sign into Globus using either
+    * An institutional login (you can select "Argonne LCF" to login using an
+      ALCF cryptocard)
+    * A Google account
+    * An Orcid
+* Once you log in, you will have a "Transfer files" screen
+* Click on the "Endpoint" box on the left side of the transfer
+    * In the search dialog, look for the "ESnet Read-Only Test DTN at Sunnyvale"
+      endpoint and select it
+* Click on the "Endpoint" box on the right side of the transfer
+    * In the search dialog, look for the "alcf#dtn\_theta" endpoint and
+      select it
+* You are now ready to transfer a file from Sunnyvale to your home directory
+  on Theta!
+* Click on the "1M.dat" file on the left side (ESnet Sunnyvale)
+* Click on the blue arrow to transfer it to the right side (ALCF Theta)
+* Once the file has transfered, log into Theta and run
+  `hands-on/globus/globus-decoder.sh 1M.dat` to decode a secret message, and
+  let your instructors know if you find it!
+
+Note that this is just a basic demonstration of how easy it is to transfer
+files with Globus.  For small files like this one you could have just as
+easily used scp.  For larger data sets, Globus online gives you a number of
+additional features and far higher performance.  See the ATPESC 2019 "Data
+Management Tools" presentation for details.
+## Array
+
+The presentation will walk you through several interfaces for writing an array
+to a file.  We have provided you with some skeleton code which you can build
+upon during the lecture.  If you get stuck you can find complete examples in
+the `solutions` directory.
+
+## Variance
+
+The variance subdirectory contains a hands-on example to illustrate the kind of variance you can expect from each job run in terms of I/O performance.  To execute it:
+
+* `cc variance.c -o variance`
+* `qsub variance.qsub`
+
+If you look in variance.qsub you will see that the job is a script job that executes the same program 5 times.  Each will display the elapsed time of the I/O routine.
+
+* What was the slowest time?
+* What was the fastest time?
+* What was the average time?
+* This is a small example program.  Do you think the variance will improve or get worse with a larger example?  What strategies might help improve performance in the example code?
 
 ## Parallel-NetCDF
 
@@ -194,38 +224,3 @@ To give you an idea of how big a problem size to use, here are some run times fo
 * Experiment with Lustre stripe sizes on Theta.  When is a stripe width of 1 a
    good idea?
 
-## Globus 
-
-The Globus hands-on exercise demonstrates how to retrieve a file from a
-Globus endpoint.  If you retrieve the file correctly, you can decode it to
-receive a secret message!
-
-### Create an Globus account
-
-* Go to https://www.globus.org and click the "Login" button in the upper
-  right hand corner
-* Sign into Globus using either
-    * An institutional login (you can select "Argonne LCF" to login using an
-      ALCF cryptocard)
-    * A Google account
-    * An Orcid
-* Once you log in, you will have a "Transfer files" screen
-* Click on the "Endpoint" box on the left side of the transfer
-    * In the search dialog, look for the "ESnet Read-Only Test DTN at Sunnyvale"
-      endpoint and select it
-* Click on the "Endpoint" box on the right side of the transfer
-    * In the search dialog, look for the "alcf#dtn\_theta" endpoint and
-      select it
-* You are now ready to transfer a file from Sunnyvale to your home directory
-  on Theta!
-* Click on the "1M.dat" file on the left side (ESnet Sunnyvale)
-* Click on the blue arrow to transfer it to the right side (ALCF Theta)
-* Once the file has transfered, log into Theta and run
-  `hands-on/globus/globus-decoder.sh 1M.dat` to decode a secret message, and
-  let your instructors know if you find it!
-
-Note that this is just a basic demonstration of how easy it is to transfer
-files with Globus.  For small files like this one you could have just as
-easily used scp.  For larger data sets, Globus online gives you a number of
-additional features and far higher performance.  See the ATPESC 2019 "Data
-Management Tools" presentation for details.
