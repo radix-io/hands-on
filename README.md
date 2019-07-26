@@ -1,6 +1,7 @@
 # ATPESC 2019 hands-on I/O exercises and reference material
 
 # Table of Contents:
+- [Reservation](#reservation)
 - [Initial setup](#initial-setup)
 - [Array](#array)
 - [Variance](#variance)
@@ -11,16 +12,26 @@
 
 Please feel free to use the hands-on time to improve your own applications or
 ask the presenters for I/O advice!  We are also providing structured,
-self-contained exercises for attendees who would like to gain  experience 
+self-contained exercises for attendees who would like to gain experience 
 working with the tools and technologies presented at ATPESC.
 
 The attendees are required to have a laptop with a working web browser and
 SSH client. For the purpose of this tutorial, all exercises can be performed
 via an SSH terminal.
 
+## Reservation
+
+ATPESC 2019 attendees will have access to a 79 node reservation on Theta 
+from 9am to 9pm to execute hands-on exercises as part of the I/O track.
+Just submit your jobs to the `training` queue and the
+`ATPESC2019` allocation (using `-A ATPESC2019` and `-q training` in your job
+script or qsub command line) for priority execution.
+
 ## Initial setup
 
-The burst buffer hands-on exercises can be performed on the Cori system at NERSC.  The rest are intended for use on the Theta system at the ALCF.  See instructions below for setting up your Theta environment.
+All examples in this hands-on collection are intended for execution on the
+Theta system at the ALCF. See instructions below for how to set
+ up your Theta environment.
 
 * Confirm account access if you haven't already (see presenters for
 details)
