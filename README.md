@@ -60,6 +60,7 @@ details on specific example programs)
   * `qsub ./<exampleprogram>.qsub`
 * Check the queue to see when your jobs complete
   * `qstat |grep <username>`
+* And/or wait for a specific job to complete with `cqwait <jobid>`
 * Look for log files in `/lus/theta-fs0/logs/darshan/theta/2019/8/2/<username>*` or `/lus/theta-fs0/logs/darshan/theta/2019/8/3/<username>*`
   * Copy log files to your home directory
 * Use `darshan-job-summary.pl` or `darshan-parser` to investigate Darshan
@@ -117,6 +118,7 @@ files with Globus.  For small files like this one you could have just as
 easily used scp.  For larger data sets, Globus online gives you a number of
 additional features and far higher performance.  See the ATPESC 2019 "Data
 Management Tools" presentation for details.
+
 ## Array
 
 The presentation will walk you through several interfaces for writing an array
