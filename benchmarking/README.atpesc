@@ -1,0 +1,46 @@
+Benchmarking and Caching Demo
+================================================================================
+
+This directory contains some examples that illustrate how caching effects may
+produce strange benchmark results.  It uses IOR to demonstrate specific
+techniques to avoid caching effects, but you are best off using your own
+application's I/O pattern.
+
+The example job script is made for NERSC's Cori system, but converting this to
+work with Cobalt on Theta is not difficult.  As an exercise to the reader, give
+it a try on Theta.
+
+If you just want to see exactly what happens when this is run, consult the
+contents of
+
+- output.0/
+- output.1/
+
+These both contain the results of two runs of the same test on NERSC's Cori
+system.  The slurm output log contains a concise summary of the tests and
+their results; the `cache_demo.out.?` files contain the outputs of the IOR
+jobs, and the Darshan log files contain the logs corresponding to each step.
+
+To run these tests yourself, you must first build IOR.  The code and
+instructions to do that are below.
+
+IOR-3.2.1+atpesc
+--------------------------------------------------------------------------------
+
+This is a version of IOR 3.2.1 with a minor modification to address
+[issue #24][].
+
+To build on a Cray XC system,
+
+    cd ior-3.2.1+atpesc
+    module unload cray-netcdf
+    module load cray-hdf5-parallel
+    module load cray-parallel-netcdf
+    ./configure --with-hdf5=$CRAY_HDF5_DIR --with-ncmpi=$CRAY_PARALLEL_NETCDF_DIR --without-gpfs
+    make
+
+This will deposit a binary called `ior` in `ior-3.2.1+atpesc/src/`.  Copy this
+to a convenient location (e.g., the directory from which you will be issuing the
+sbatch or qsub commands).
+
+[issue #24]: https://github.com/hpc/ior/issues/24

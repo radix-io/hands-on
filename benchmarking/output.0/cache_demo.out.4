@@ -1,0 +1,65 @@
+srun: Job 23448871 step creation temporarily disabled, retrying
+srun: Step created for job 23448871
+IOR-3.2.1: MPI Coordinated Test of Parallel I/O
+Began               : Thu Aug  1 07:14:30 2019
+Command line        : /global/u2/g/glock/atpesc/test_cori/./ior -g -i4 -v -o /global/cscratch1/sd/glock/ior-cache-demo/testFile -t 1m -b 16m -s 16 -C -e
+Machine             : Linux nid00705
+Start time skew across all tasks: 0.00 sec
+TestID              : 0
+StartTime           : Thu Aug  1 07:14:30 2019
+Path                : /global/cscratch1/sd/glock/ior-cache-demo
+FS                  : 27719.5 TiB   Used FS: 61.5%   Inodes: 5955.2 Mi   Used Inodes: 23.4%
+Participating tasks: 64
+Using reorderTasks '-C' (expecting block, not cyclic, task assignment)
+
+Options: 
+api                 : POSIX
+apiVersion          : 
+test filename       : /global/cscratch1/sd/glock/ior-cache-demo/testFile
+access              : single-shared-file
+type                : independent
+segments            : 16
+ordering in a file  : sequential
+ordering inter file : constant task offset
+task offset         : 1
+tasks               : 64
+clients per node    : 16
+repetitions         : 4
+xfersize            : 1 MiB
+blocksize           : 16 MiB
+aggregate filesize  : 16 GiB
+
+Results: 
+
+access    bw(MiB/s)  block(KiB) xfer(KiB)  open(s)    wr/rd(s)   close(s)   total(s)   iter
+------    ---------  ---------- ---------  --------   --------   --------   --------   ----
+Commencing write performance test: Thu Aug  1 07:14:30 2019
+write     373.09     16384      1024.00    0.003346   43.91      0.000348   43.91      0   
+Commencing read performance test: Thu Aug  1 07:15:14 2019
+read      1643.85    16384      1024.00    0.010025   9.96       0.000368   9.97       0   
+remove    -          -          -          -          -          -          0.881726   0   
+Commencing write performance test: Thu Aug  1 07:15:25 2019
+write     443.15     16384      1024.00    0.002370   36.97      0.000383   36.97      1   
+Commencing read performance test: Thu Aug  1 07:16:02 2019
+read      2271.60    16384      1024.00    0.010001   7.20       0.000416   7.21       1   
+remove    -          -          -          -          -          -          0.918481   1   
+Commencing write performance test: Thu Aug  1 07:16:10 2019
+write     480.86     16384      1024.00    0.002044   34.07      0.000409   34.07      2   
+Commencing read performance test: Thu Aug  1 07:16:44 2019
+read      431.82     16384      1024.00    0.009698   37.93      0.000352   37.94      2   
+remove    -          -          -          -          -          -          0.857710   2   
+Commencing write performance test: Thu Aug  1 07:17:23 2019
+write     365.70     16384      1024.00    0.003724   44.80      0.000362   44.80      3   
+Commencing read performance test: Thu Aug  1 07:18:08 2019
+read      1568.77    16384      1024.00    0.012263   10.43      0.000348   10.44      3   
+remove    -          -          -          -          -          -          0.871710   3   
+Max Write: 480.86 MiB/sec (504.22 MB/sec)
+Max Read:  2271.60 MiB/sec (2381.94 MB/sec)
+
+Summary of all tests:
+Operation   Max(MiB)   Min(MiB)  Mean(MiB)     StdDev   Max(OPs)   Min(OPs)  Mean(OPs)     StdDev    Mean(s) Test# #Tasks tPN reps fPP reord reordoff reordrand seed segcnt   blksiz    xsize aggs(MiB)   API RefNum
+write         480.86     365.70     415.70      48.26     480.86     365.70     415.70      48.26   39.93970     0     64  16    4   0     1        1         0    0     16 16777216  1048576   16384.0 POSIX      0
+read         2271.60     431.82    1479.01     663.33    2271.60     431.82    1479.01     663.33   16.39118     0     64  16    4   0     1        1         0    0     16 16777216  1048576   16384.0 POSIX      0
+MPIIO WARNING: DVS stripe width of 32 was requested but DVS set it to 28
+See MPICH_MPIIO_DVS_MAXNODES in the intro_mpi man page.
+Finished            : Thu Aug  1 07:18:19 2019

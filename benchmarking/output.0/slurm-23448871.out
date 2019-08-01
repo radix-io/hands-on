@@ -1,0 +1,20 @@
+rmdir: removing directory, '/global/cscratch1/sd/glock/ior-cache-demo'
+mkdir: created directory '/global/cscratch1/sd/glock/ior-cache-demo'
+Running with naive options
+Max Write: 442.71 MiB/sec (464.21 MB/sec)
+Max Read:  18789.51 MiB/sec (19702.22 MB/sec)
+Running with -F
+Max Write: 13967.90 MiB/sec (14646.41 MB/sec)
+Max Read:  266073.02 MiB/sec (278997.78 MB/sec)
+Running with -F -C
+Max Write: 13799.40 MiB/sec (14469.72 MB/sec)
+Max Read:  7122.62 MiB/sec (7468.61 MB/sec)
+Running with -F -C -e
+Max Write: 13259.36 MiB/sec (13903.45 MB/sec)
+Max Read:  2882.59 MiB/sec (3022.62 MB/sec)
+Running with -C -e
+Max Write: 480.86 MiB/sec (504.22 MB/sec)
+Max Read:  2271.60 MiB/sec (2381.94 MB/sec)
+Running with -C -e, this time with striping
+Max Write: 2176.59 MiB/sec (2282.32 MB/sec)
+Max Read:  4417.21 MiB/sec (4631.78 MB/sec)
