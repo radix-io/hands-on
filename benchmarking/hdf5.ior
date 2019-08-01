@@ -1,0 +1,11 @@
+IOR START
+intraTestBarriers=1
+repetitions=4
+verbose=1
+
+api=HDF5
+filePerProc=0
+collective=0
+writefile=1
+RUN
+IOR STOP
