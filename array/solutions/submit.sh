@@ -16,13 +16,14 @@ export PATH=.:${PATH}
 
 APPLICATION=$1
 
-TRAINING_DIR=/lus/theta-fs0/projects/ATPESC2018/data-and-io/$USER
+TRAINING_DIR=/lus/theta-fs0/projects/ATPESC2019/data-and-io/$USER
 # shell expansion syntax: if there is no second argument, use the file name
 # 'testfile' as default value
 FILENAME=${2:-testfile}
 
 mkdir -p ${TRAINING_DIR}
 
+echo "writing to ${TRAINING_DIR}/${FILENAME}"
 aprun -n $n_mpi_ranks -N $n_mpi_ranks_per_node \
   --env OMP_NUM_THREADS=$n_openmp_threads_per_rank -cc depth \
   -d $n_hyperthreads_skipped_between_ranks \
