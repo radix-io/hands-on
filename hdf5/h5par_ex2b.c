@@ -1,4 +1,4 @@
-/* HDF5 Dataset example, independent metadata modification */
+/* HDF5 Dataset example, collective metadata modification */
 
 /* System header files */
 #include <assert.h>
@@ -7,7 +7,7 @@
 #include "hdf5.h"
 
 /* Predefined names and sizes */
-#define FILENAME "h5par_ex2a.h5"
+#define FILENAME "h5par_ex2b.h5"
 #define DATASETNAME "Dataset 1"
 #define RANK    2
 #define DIM0    (230 * 1000)
