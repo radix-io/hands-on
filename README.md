@@ -23,8 +23,8 @@ via an SSH terminal.
 
 ATPESC 2019 attendees will have access to a 79 node reservation on Theta 
 from 9am to 9pm to execute hands-on exercises as part of the I/O track.
-Just submit your jobs to the `training` queue and the
-`ATPESC2019` allocation (using `-A ATPESC2019` and `-q training` in your job
+Just submit your jobs to the `R.ATPESC2019` queue and the
+`ATPESC2019` allocation (using `-A ATPESC2019` and `-q R.ATPESC2019` in your job
 script or qsub command line) for priority execution.
 
 ## Initial setup
@@ -44,7 +44,7 @@ details)
 * Set up your environment to have access to the utilities needed for the hands-on exercises
   * `source ./setup-env.sh`
 
-Please use the `ATPESC2019` project and `training` queue for job submissions.  You can also use
+Please use the `ATPESC2019` project and `R.ATPESC2019` queue for job submissions.  You can also use
 the `/projects/ATPESC2019` directory for data storage if you modify the
 exercise scripts or try your own examples.
 
