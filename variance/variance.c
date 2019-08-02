@@ -4,7 +4,7 @@
 
 /* COMPILE:
  *
- * mpicc -Wall variance.c -o variance
+ * cc -Wall variance.c -o variance
  */
 
 
