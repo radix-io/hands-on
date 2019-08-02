@@ -4,7 +4,7 @@
 
 /* COMPILE:
  *
- * mpicc -Wall warpdriveB.c -o warpdriveB
+ * cc -Wall warpdriveB.c -o warpdriveB
  */
 
 

@@ -4,7 +4,7 @@
 
 /* COMPILE:
  *
- * mpicc -Wall helloworld.c -o helloworld
+ * cc -Wall helloworld.c -o helloworld
  */
 
 

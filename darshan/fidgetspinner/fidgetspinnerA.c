@@ -4,7 +4,7 @@
 
 /* COMPILE:
  *
- * mpicc -Wall fidgetspinnerA.c -o fidgetspinnerA
+ * cc -Wall fidgetspinnerA.c -o fidgetspinnerA
  */
 
 
