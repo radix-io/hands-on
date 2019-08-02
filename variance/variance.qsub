@@ -3,7 +3,7 @@
 #COBALT -t 20
 #COBALT --mode script
 #COBALT -A ATPESC2019
-#COBALT -q training
+#COBALT -q R.ATPESC2019
 
 # make sure scratch dir exists
 for i in `seq 1 5`; do
