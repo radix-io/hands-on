@@ -45,5 +45,5 @@ int main(int argc, char **argv)
 {
     int ret;
 
-    ret = write_data("testfile");
+    ret = write_data(argv[0]);
 }
