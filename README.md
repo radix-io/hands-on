@@ -48,7 +48,7 @@ details)
   * `mkdir atpesc-io`
   * `cd atpesc-io`
   * `git clone https://xgitlab.cels.anl.gov/ATPESC-IO/hands-on.git`
-  * `cd hands-on
+  * `cd hands-on`
 * Set up your environment to have access to the utilities needed for the hands-on exercises
   * `source ./theta-setup-env.sh`
 
