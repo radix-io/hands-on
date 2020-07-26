@@ -50,7 +50,7 @@ details)
   * `git clone https://xgitlab.cels.anl.gov/ATPESC-IO/hands-on.git`
   * `cd hands-on
 * Set up your environment to have access to the utilities needed for the hands-on exercises
-  * `source ./setup-env.sh`
+  * `source ./theta-setup-env.sh`
 
 ## Darshan
 
