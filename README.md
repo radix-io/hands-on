@@ -4,7 +4,6 @@
 - [Reservation](#reservation)
 - [Initial setup](#initial-setup)
 - [Darshan](#darshan)
-- [Globus](#globus)
 - [Array](#array)
 - [Variance](#variance)
 - [Parallel-NetCDF](#parallel-netcdf)
