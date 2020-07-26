@@ -2,8 +2,8 @@
 #COBALT -n 4
 #COBALT -t 15
 #COBALT --mode script
-#COBALT -A ATPESC2019
-#COBALT -q R.ATPESC2019
+#COBALT -A ATPESC2020
+#COBALT -q ATPESC2020
 
 # make sure scratch dir exists
 mkdir -p /projects/ATPESC2019/$USER

@@ -2,16 +2,16 @@
 #COBALT -n 4
 #COBALT -t 15
 #COBALT --mode script
-#COBALT -A ATPESC2019
-#COBALT -q R.ATPESC2019
+#COBALT -A ATPESC2020
+#COBALT -q ATPESC2020
 
 # make sure scratch dir exists
-mkdir -p /projects/ATPESC2019/$USER
+mkdir -p /projects/ATPESC2020/$USER
 # set striping parameters to use all servers
-lfs setstripe -c -1 /projects/ATPESC2019/$USER
+lfs setstripe -c -1 /projects/ATPESC2020/$USER
 
 # delete old file if present
-rm -rf /projects/ATPESC2019/$USER/warpdriveA
+rm -rf /projects/ATPESC2020/$USER/warpdriveA
 
 # submit job
-aprun -n 256 -N 64 ./warpdriveA /projects/ATPESC2019/$USER/
+aprun -n 256 -N 64 ./warpdriveA /projects/ATPESC2020/$USER/
