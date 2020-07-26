@@ -56,6 +56,10 @@ details)
 
 ### Running hands-on example programs
 
+All Darshan hands-on examples are set up for use on the Theta (ALCF) system.
+See the Theta setup instructions above to configure your baseline
+environment.
+
 * Compile example programs and submit into the job queue (see below for
 details on specific example programs)
   * `cc <exampleprogram>.c -o <exampleprogram>`
