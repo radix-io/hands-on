@@ -1,5 +1,8 @@
 # change these three according to your environment, or load apropriate
 # modules(1)
+# setting PNECDF to /usr is a trick. It lets us rely on modules in the common
+# case.  If you went and build your own pnetcdf and installed it into your,
+# say, $HOME/soft directory, then you can modify this line.
 PNETCDF=/usr
 MPICC=cc
 

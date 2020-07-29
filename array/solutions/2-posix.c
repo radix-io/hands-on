@@ -11,6 +11,8 @@
 
 int write_data(char *filename)
 {
+    /* We will store whatever additional information we want to retain about
+     * the data in this struct */
     science data = {
         .row = YDIM,
         .col = XDIM,
@@ -21,11 +23,14 @@ int write_data(char *filename)
     int fd;
     int ret=0;
 
+    /* defined in util.c, this routine will give us an initialized region of memory */
     array = buffer_create(0, XDIM, YDIM);
 
     fd = open(filename, O_CREAT|O_WRONLY, S_IRUSR|S_IWUSR);
     if (fd < 0) goto fn_error;
 
+    /* we have two  memory regions -- the data and the struct containing
+     * information about the data -- so we have to issue two write calls */
     ret = write(fd, &data, sizeof(data));
     if (ret < 0) goto fn_error;
 
