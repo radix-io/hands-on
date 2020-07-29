@@ -73,6 +73,15 @@ characterization data
   * darshan-job-summary.pl will produce \*.pdf files with an analysis summary.
   * You can use scp to copy these to your laptop to view them, or run `evince *.pdf` on Theta to display them remotely over your ssh session it forwards X connections.
 
+### Darshan on Ascent
+
+On Theta, one can generate a darshan log file and the report all on one system.
+Ascent is missing a few packages for that. However, enterprising attendees can
+find their log files on Ascent in the `/gpfs/wolf/darshan/ascent/2020/7/31`
+directory.  Adventuresome attendees could try moving the log file to theta (or
+a laptop with the `darshan-util` package and necessary latex components)
+installed and generating the report there.
+
 ### Hands-on exercise: helloworld
 
 The hands-on material includes an example application called `helloworld`.
@@ -127,10 +136,12 @@ If you look in variance.qsub you will see that the job is a script job that exec
 
 ## Parallel-NetCDF
 
-You can install Parallel-NetCDF on your laptop easily enough, or you can use
-the installation on Mira/Cetus (at /soft/libraries/pnetcdf/current/cnk-gcc/current).  The
-Parallel-NetCDF projet has a [Quick Tutorial](http://trac.mcs.anl.gov/projects/parallel-netcdf/wiki/QuickTutorial) outlining several different ways
-one can do I/O with Parallel-NetCDF.  We'll also explore attributes.
+You can install Parallel-NetCDF on your laptop easily enough if you already
+have MPI installed.  On Theta or Ascent, the setup script will load the
+necessary modules.  The Parallel-NetCDF projet has a
+[Quick Tutorial](http://trac.mcs.anl.gov/projects/parallel-netcdf/wiki/QuickTutorial)
+outlining several different ways one can do I/O with Parallel-NetCDF.  We'll
+also explore attributes.
 
 ### Hands-on exercise: comparing I/O approaches
 * The
@@ -153,19 +164,12 @@ one can do I/O with Parallel-NetCDF.  We'll also explore attributes.
 
 ## Game of Life
 
-We have provided the Game of Life code discussed today if you want to
+We have provided the a Game of Life program if you want to
 experiment with I/O and do not already have a program handy.
 
 ### Building Notes
-To build the "game of life" example on ALCF's IBM machines (Mira, Cetus, Vesta), configure with
-`--with-mpi=/soft/compilers/wrappers/gcc/` and
-`--with-pnetcdf=/soft/libraries/pnetcdf/current/cnk-gcc/current`
 
-    configure --with-mpi=/soft/compilers/wrappers/gcc/ \
-        --with-pnetcdf=/soft/libraries/pnetcdf/current/cnk-gcc/current
-
-
-For Theta, the paths are a little different.  Configure might pick up the right
+For Theta, cnfigure might pick up the right
 MPI libraries automatically, but you can explicitly set MPICC and MPIF77 if it
 does not.  Also, put configure into cross-compile mode with the `--host` flag so it does not try to run compute node code on the front end.
 
