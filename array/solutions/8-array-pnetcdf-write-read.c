@@ -98,7 +98,7 @@ int read_data(MPI_Comm comm, char *filename)
      * that the variable we are reading is what we expect */
     NC_CHECK(ncmpi_inq_var(ncfile, 0, varname, &vartype, &nr_dims, dim_ids,
                 &nr_attrs));
-    if (nr_dims != NDIMS || strncmp(varname, "array", strlen("array") != 0))
+    if (nr_dims != NDIMS || strncmp(varname, "array", strlen("array")) != 0)
         fprintf(stderr, "Error: unexpected variable %s of dim %d in file\n",
                 varname, nr_dims);
 
