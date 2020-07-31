@@ -51,6 +51,9 @@ details)
 * Set up your environment to have access to the utilities needed for the hands-on exercises
   * `source ./theta-setup-env.sh`
 
+## Initial setup (Ascent)
+* same as Theta above, exept source `ascent-setup-ev.sh`
+
 ## Darshan
 
 ### Running hands-on example programs
@@ -119,6 +122,11 @@ The presentation will walk you through several interfaces for writing an array
 to a file.  We have provided you with some skeleton code which you can build
 upon during the lecture.  If you get stuck you can find complete examples in
 the `solutions` directory.
+
+## IOR
+
+IOR has a lot of command line arguments.  I have included the job submission
+scripts I used for the talk in the 'ior' directory
 
 ## Variance
 
