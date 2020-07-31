@@ -6,10 +6,10 @@
 #COBALT -q ATPESC2020
 
 # make sure scratch dir exists
-mkdir -p /projects/ATPESC2019/$USER
+mkdir -p /projects/ATPESC2020/$USER
 
 # delete old file if present
-rm -rf /projects/ATPESC2019/$USER/fidgetspinnerB*
+rm -rf /projects/ATPESC2020/$USER/fidgetspinnerB*
 
 # submit job
-aprun -n 128 -N 32 ./fidgetspinnerB /projects/ATPESC2019/$USER/
+aprun -n 128 -N 32 ./fidgetspinnerB /projects/ATPESC2020/$USER/
