@@ -38,21 +38,24 @@ username to avoid conflicts with other users.
 On Ascent, submit your jobs in the GEN139 project using the `-P GEN139`
 options in your job script or bsub command line.
 
-## Initial setup (Theta)
+## Initial setup (Theta or Ascent)
 
 * Confirm account access if you haven't already (see presenters for
 details)
-* Log on to Theta
-* Download the tutorial materials to your home directory
+* Log on to Theta or Ascent
+* Download the tutorial materials to your home directory.  Theta and Ascent are
+  completely different machines managed by different groups so if you plan on
+  trying out both, you'll have to repeat these steps on each machine.
   * `mkdir atpesc-io`
   * `cd atpesc-io`
   * `git clone https://xgitlab.cels.anl.gov/ATPESC-IO/hands-on.git`
+    * ascent only: did you get `error: RPC failed; result=22, HTTP code = 404` ?
+    * default git (`/usr/bin/git`) on ascent is too old.  Do a `module load git`
+      to bring in version 2.20.1: that version is new enough to negotiate
+      with our xgitlab.cels.anl.gov server
   * `cd hands-on`
 * Set up your environment to have access to the utilities needed for the hands-on exercises
-  * `source ./theta-setup-env.sh`
-
-## Initial setup (Ascent)
-* same as Theta above, exept source `ascent-setup-ev.sh`
+  * `source ./theta-setup-env.sh` or `ascent-setup-env.sh`
 
 ## Darshan
 
