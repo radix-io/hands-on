@@ -1,4 +1,4 @@
-# ATPESC 2020 hands-on I/O exercises and reference material
+# ATPESC 2021 hands-on I/O exercises and reference material
 
 # Table of Contents:
 - [Reservation](#reservation)
@@ -10,10 +10,10 @@
 - [Game of Life](#game-of-life)
 
 This is the documentation for the hands-on exercises in the ``Track 3: Data
-Intensive Computing and I/O'' portion of ATPESC 2020.  Agenda information
+Intensive Computing and I/O'' portion of ATPESC 2021.  Agenda information
 can be found here:
 
-[ATPESC 2020 Track 3 agenda](https://extremecomputingtraining.anl.gov/agenda-2020/#Track-3)
+[ATPESC 2021 Track 3 agenda](https://extremecomputingtraining.anl.gov/agenda-2021/#Track-3)
 
 We will describe these exercises in greater detail during the ATPESC
 lectures and provide hands-on support via the #io channel in Slack.  Feel
@@ -25,13 +25,13 @@ via an SSH terminal.
 
 ## Reservations
 
-ATPESC 2020 attendees will have access to a 64 node reservation on Theta
+ATPESC 2021 attendees will have access to a 64 node reservation on Theta
 (ALCF) and an 18 node reservation on Ascent (OLCF) from 9am to 6pm CT
 to execute hands-on exercises as part of the I/O track.
 
-On Theta, submit your jobs to the `ATPESC2020` queue and the `ATPESC2020`
-allocation using the `-A ATPESC2020` and `-q ATPESC2020` options in your job
-script or qsub command line.  You can use the /projects/ATPESC2020/
+On Theta, submit your jobs to the `ATPESC2021` queue and the `ATPESC2021`
+allocation using the `-A ATPESC2021` and `-q ATPESC2021` options in your job
+script or qsub command line.  You can use the /projects/ATPESC2021/
 directory for data storage; please create a subdirectory there based on your
 username to avoid conflicts with other users.
 
@@ -72,7 +72,7 @@ details on specific example programs)
 * Check the queue to see when your jobs complete
   * `qstat |grep <username>`
 * And/or wait for a specific job to complete with `cqwait <jobid>`
-* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2020/7/31/<username>*` (or whatever the current day is in GMT)
+* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2021/8/6/<username>*` (or whatever the current day is in GMT)
   * Copy log files to your home directory
 * Use `darshan-job-summary.pl` or `darshan-parser` to investigate Darshan
 characterization data
@@ -83,7 +83,7 @@ characterization data
 
 On Theta, one can generate a darshan log file and the report all on one system.
 Ascent is missing a few packages for that. However, enterprising attendees can
-find their log files on Ascent in the `/gpfs/wolf/darshan/ascent/2020/7/31`
+find their log files on Ascent in the `/gpfs/wolf/darshan/ascent/2021/8/6`
 directory.  Adventuresome attendees could try moving the log file to theta (or
 a laptop with the `darshan-util` package and necessary latex components)
 installed and generating the report there.
