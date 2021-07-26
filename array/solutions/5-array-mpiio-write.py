@@ -1,15 +1,15 @@
 from mpi4py import MPI
 import sys
-import array
+import numpy as np
 
 YDIM = 1
 XDIM = 5
 
 
 def generate_data(seed=0, x=XDIM, y=YDIM):
-    raw_data = []
+    raw_data = np.empty(x*y, dtype='int32')
     for x in range(x*y):
-        raw_data.append(seed*10+x)
+        raw_data[x] = seed*10+x
 
     return raw_data
 
@@ -27,7 +27,7 @@ def write_data(comm=MPI.COMM_WORLD, filename="dummy"):
     fh = MPI.File.Open(comm, filename, amode)
 
     # subsequent data is for all processes, one row per process
-    science_metadata = [YDIM*comm.Get_size(), XDIM, 1]
+    science_metadata = np.array([YDIM*comm.Get_size(), XDIM, 1], dtype='int32')
 
     # While it's not exactly natural to write out binary in Python,
     # binary data is easier to decompose across multiple processors:
@@ -36,13 +36,13 @@ def write_data(comm=MPI.COMM_WORLD, filename="dummy"):
 
     if comm.Get_rank() == 0:
 
-        fh.Write(array.array("i", science_metadata).tobytes())
+        fh.Write(science_metadata.tobytes())
 
     sizeof_int = 4  # we will store C-style integers, not python int objects
     fh.Set_view(len(science_metadata)*sizeof_int,
                 etype=MPI.INT, filetype=MPI.INT)
     fh.Write_at_all(comm.Get_rank()*XDIM*YDIM,
-                    array.array("i", my_data).tobytes())
+                    my_data.tobytes())
     fh.Close()
 
 
