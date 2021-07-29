@@ -8,6 +8,3 @@ module add texlive
 # python modules
 
 module add miniconda-3/latest
-
-# additional environment tweaks:
-export PERLLIB=/projects/ATPESC2020/atpesc-io/perl5
