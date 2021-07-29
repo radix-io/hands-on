@@ -1,0 +1,13 @@
+#!/bin/bash
+#BSUB -P GEN161
+#BSUB -W 0:15
+#BSUB -nnodes 4
+
+# make sure scratch dir exists
+mkdir -p /gpfs/wolf/gen161/scratch/$USER
+
+# delete old file if present
+rm -rf /gpfs/wolf/gen161/scratch/$USER/helloworld
+
+# submit job
+jsrun -n 2 -r 1 -c ALL_CPUS ./helloworld /gpfs/wolf/gen161/scratch/$USER/
