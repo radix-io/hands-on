@@ -35,7 +35,7 @@ script or qsub command line.  You can use the /projects/ATPESC2021/
 directory for data storage; please create a subdirectory there based on your
 username to avoid conflicts with other users.
 
-On Ascent, submit your jobs in the GEN139 project using the `-P GEN139`
+On Ascent, submit your jobs in the GEN161 project using the `-P GEN161`
 options in your job script or bsub command line.
 
 ## Initial setup (Theta or Ascent)
