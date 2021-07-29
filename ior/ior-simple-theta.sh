@@ -2,7 +2,7 @@
 #COBALT -t 10
 #COBALT -n 1
 #COBALT --attrs mcdram=cache:numa=quad
-#COBALT -A ATPESC2020
+#COBALT -A ATPESC2021
 
 module swap PrgEnv-intel PrgEnv-gnu
 
