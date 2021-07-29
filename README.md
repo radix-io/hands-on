@@ -84,6 +84,11 @@ directory.  Adventuresome attendees could try moving the log file to theta (or
 a laptop with the `darshan-util` package and necessary latex components)
 installed and generating the report there.
 
+On Ascent, use `mpicc` rather than `cc` to compile your executable,
+and submit batch jobs using `bsub` rather than `qsub`.  You can find
+an example bsub script hands-on/darshan/helloworld/helloworld.lsf.
+It can be adapted for use with the other Darshan example programs.
+
 ### Hands-on exercise: helloworld
 
 The hands-on material includes an example application called `helloworld`.
