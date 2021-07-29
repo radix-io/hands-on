@@ -78,16 +78,17 @@ characterization data
 ### Darshan on Ascent
 
 On Theta, one can generate a darshan log file and the report all on one system.
-Ascent is missing a few packages for that. However, enterprising attendees can
-find their log files on Ascent in the `/gpfs/wolf/darshan/ascent/2021/8/6`
-directory.  Adventuresome attendees could try moving the log file to theta (or
-a laptop with the `darshan-util` package and necessary latex components)
-installed and generating the report there.
+Ascent is missing a few packages for that. However,
+enterprising attendees can find their log files on Ascent in the
+`/gpfs/wolf/darshan/ascent/2021/8/6` directory and then move them to
+theta (or a laptop with the `darshan-util` package and necessary latex
+components) installed and generate the report there.
 
-On Ascent, use `mpicc` rather than `cc` to compile your executable,
-and submit batch jobs using `bsub` rather than `qsub`.  You can find
-an example bsub script hands-on/darshan/helloworld/helloworld.lsf.
-It can be adapted for use with the other Darshan example programs.
+On Ascent, use `mpicc` rather than `cc` to compile your executable, and submit
+batch jobs using `bsub` rather than `qsub`.  The project name to use on Ascent
+during ATPESC 2021 is GEN161 rather than ATPESC2021.  You can find an example
+bsub script hands-on/darshan/helloworld/helloworld.lsf.  It can be adapted for
+use with the other Darshan example programs.
 
 ### Hands-on exercise: helloworld
 
