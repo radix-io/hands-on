@@ -31,7 +31,8 @@ to execute hands-on exercises as part of the I/O track.
 
 On Theta, submit your jobs to the `ATPESC2021` queue and the `ATPESC2021`
 allocation using the `-A ATPESC2021` and `-q ATPESC2021` options in your job
-script or qsub command line.  You can use the /projects/ATPESC2021/
+script or qsub command line.  You can use the
+/grand/projects/ATPESC2021/usr/
 directory for data storage; please create a subdirectory there based on your
 username to avoid conflicts with other users.
 
