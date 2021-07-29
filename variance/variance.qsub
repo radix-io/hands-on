@@ -7,15 +7,15 @@
 
 # make sure scratch dir exists
 for i in `seq 1 5`; do
-    mkdir -p /projects/ATPESC2019/$USER/$i
+    mkdir -p /grand/projects/ATPESC2021/usr/$USER/$i
 done
 
 # delete old file if present
 for i in `seq 1 5`; do
-    rm -rf /projects/ATPESC2019/$USER/$i/variance*
+    rm -rf /grand/projects/ATPESC2021/usr/$USER/$i/variance*
 done
 
 # submit job
 for i in `seq 1 5`; do
-    aprun -n 256 -N 64 ./variance /projects/ATPESC2019/$USER/$i
+    aprun -n 256 -N 64 ./variance /grand/projects/ATPESC2021/usr/$USER/$i
 done

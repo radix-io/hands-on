@@ -6,12 +6,12 @@
 #COBALT -q ATPESC2021
 
 # make sure scratch dir exists
-mkdir -p /projects/ATPESC2021/$USER
+mkdir -p /grand/projects/ATPESC2021/usr/$USER
 # set striping parameters to use all servers
-lfs setstripe -c -1 /projects/ATPESC2021/$USER
+lfs setstripe -c -1 /grand/projects/ATPESC2021/usr/$USER
 
 # delete old file if present
-rm -rf /projects/ATPESC2021/$USER/warpdriveA
+rm -rf /grand/projects/ATPESC2021/usr/$USER/warpdriveA
 
 # submit job
-aprun -n 256 -N 64 ./warpdriveA /projects/ATPESC2021/$USER/
+aprun -n 256 -N 64 ./warpdriveA /grand/projects/ATPESC2021/usr/$USER/
