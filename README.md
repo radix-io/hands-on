@@ -48,14 +48,10 @@ details)
   trying out both, you'll have to repeat these steps on each machine.
   * `mkdir atpesc-io`
   * `cd atpesc-io`
-  * `git clone https://xgitlab.cels.anl.gov/ATPESC-IO/hands-on.git`
-    * ascent only: did you get `error: RPC failed; result=22, HTTP code = 404` ?
-    * default git (`/usr/bin/git`) on ascent is too old.  Do a `module load git`
-      to bring in version 2.20.1: that version is new enough to negotiate
-      with our xgitlab.cels.anl.gov server
+  * `git clone https://github.com/radix-io/hands-on.git`
   * `cd hands-on`
 * Set up your environment to have access to the utilities needed for the hands-on exercises
-  * `source ./theta-setup-env.sh` or `ascent-setup-env.sh`
+  * `source ./theta-setup-env.sh` or `./ascent-setup-env.sh`
 
 ## Darshan
 
