@@ -1,6 +1,6 @@
 #!/bin/bash
 #COBALT -t 10
-#COBALT -n 1
+#COBALT -n 2
 #COBALT --attrs mcdram=cache:numa=quad
 #COBALT -A ATPESC2021
 #COBALT -q ATPESC2021
@@ -16,13 +16,15 @@ export PATH=.:${PATH}
 
 APPLICATION=$1
 
-TRAINING_DIR=/lus/theta-fs0/projects/ATPESC2021/data-and-io/$USER
+TRAINING_DIR=/grand/ATPESC2021/$USER
+
 # shell expansion syntax: if there is no second argument, use the file name
 # 'testfile' as default value
 FILENAME=${2:-testfile}
 
 mkdir -p ${TRAINING_DIR}
 
+echo "writing to ${TRAINING_DIR}/${FILENAME}"
 aprun -n $n_mpi_ranks -N $n_mpi_ranks_per_node \
   --env OMP_NUM_THREADS=$n_openmp_threads_per_rank -cc depth \
   -d $n_hyperthreads_skipped_between_ranks \

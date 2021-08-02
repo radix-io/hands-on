@@ -1,6 +1,6 @@
 #!/bin/bash
 #COBALT -t 10
-#COBALT -n 1
+#COBALT -n 2
 #COBALT --attrs mcdram=cache:numa=quad
 #COBALT -A ATPESC2021
 #COBALT -q ATPESC2021
@@ -16,7 +16,8 @@ export PATH=.:${PATH}
 
 APPLICATION=$1
 
-TRAINING_DIR=/lus/theta-fs0/projects/ATPESC2021/data-and-io/$USER
+TRAINING_DIR=/grand/ATPESC2021/$USER
+
 # shell expansion syntax: if there is no second argument, use the file name
 # 'testfile' as default value
 FILENAME=${2:-testfile}
