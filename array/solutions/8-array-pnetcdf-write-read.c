@@ -109,10 +109,10 @@ int read_data(MPI_Comm comm, char *filename)
                 "iteration", &iterations));
 
     /* read a single column (count[1] = 1).
-     * The column is nprocs tall (count[0] = nprocs
-     * start reading from the first row (starts[0] = 0
+     * We know how long the column is from 'dim_lens[0]'
+     * start reading from the first row (starts[0] = 0 )
      * and pick the column in the middle (starts[1] = XDIM/2) */
-    count[0] = nprocs; count[1] = 1;
+    count[0] = dim_lens[0]; count[1] = 1;
     starts[0] = 0;     starts[1] = XDIM/2;
     NC_CHECK(ncmpi_get_vara_int_all(ncfile, 0, starts, count, read_buf));
 
