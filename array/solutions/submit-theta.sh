@@ -4,6 +4,9 @@
 #COBALT --attrs mcdram=cache:numa=quad
 #COBALT -A ATPESC2021
 #COBALT -q ATPESC2021
+
+set -euo pipefail
+
 export n_nodes=$COBALT_JOBSIZE
 export n_mpi_ranks_per_node=32
 export n_mpi_ranks=$(($n_nodes * $n_mpi_ranks_per_node))
