@@ -21,7 +21,7 @@
 #include <getopt.h>
 #include <limits.h>
 
-#define IOSIZE 20000
+#define IOSIZE 200000
 
 static int example1A(const char* dir, int rank, int nprocs);
 

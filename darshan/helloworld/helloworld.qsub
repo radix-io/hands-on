@@ -15,3 +15,6 @@ rm -rf /grand/projects/ATPESC2021/usr/$USER/helloworld
 
 # submit job
 aprun -n 256 -N 64 ./helloworld /grand/projects/ATPESC2021/usr/$USER/
+
+# delete the new file to avoid exhausing the ATPESC quota
+rm -rf /grand/projects/ATPESC2021/usr/$USER/helloworld

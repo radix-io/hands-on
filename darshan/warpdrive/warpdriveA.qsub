@@ -15,3 +15,6 @@ rm -rf /grand/projects/ATPESC2021/usr/$USER/warpdriveA
 
 # submit job
 aprun -n 256 -N 64 ./warpdriveA /grand/projects/ATPESC2021/usr/$USER/
+
+# delete new file to avoid exhausting ATPESC quota
+rm -rf /grand/projects/ATPESC2021/usr/$USER/warpdriveA
