@@ -1,0 +1,5 @@
+*.o
+*.ps
+*.pdf
+csrio-mpiio
+csrio-stdout

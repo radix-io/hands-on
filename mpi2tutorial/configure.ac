@@ -160,4 +160,5 @@ AC_SUBST(MPI_DIR)
 AC_SUBST(PNETCDF_DIR)
 AC_SUBST(FPMPI2_DIR)
 AC_OUTPUT(examples/life/Makefile examples/pneo/Makefile \
-	  examples/mutex/Makefile examples/spawn/Makefile )
+	  examples/mutex/Makefile examples/spawn/Makefile \
+	  examples/sparsemat/Makefile)

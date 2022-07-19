@@ -5,7 +5,7 @@ MAKE = make
 CTOPS=../maint/ctops
 CTOPDF=../maint/ctopdf
 
-DIRS = life pneo spawn mutex
+DIRS = life pneo spawn mutex sparsemat
 
 PSFILES=life/mlife.ps \
 	life/mlife-pt2pt.ps \
@@ -19,7 +19,8 @@ PSFILES=life/mlife.ps \
 	life/mlife2d-io-stdout.ps \
 	life/mlife2d-fence.ps \
 	pneo/pneo_fence.ps \
-	pneo/pneo_pscw.ps
+	pneo/pneo_pscw.ps \
+	sparsemat/csrio-mpiio.ps
 
 PDFFILES = $(PSFILES:.ps=.pdf)
 
@@ -28,7 +29,7 @@ PDFFILES = $(PSFILES:.ps=.pdf)
 #	life/mlife2d-io-pnetcdf.ps
 
 all-redirect:
-	for dir in life pneo spawn mutex ; do \
+	for dir in life pneo spawn mutex sparsemat; do \
 	    (cd $$dir && $(MAKE) ) ; \
 	done
 
