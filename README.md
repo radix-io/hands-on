@@ -1,4 +1,4 @@
-# ATPESC 2021 hands-on I/O exercises and reference material
+# ATPESC 2022 hands-on I/O exercises and reference material
 
 # Table of Contents:
 - [Reservation](#reservation)
@@ -8,12 +8,13 @@
 - [Variance](#variance)
 - [Parallel-NetCDF](#parallel-netcdf)
 - [Game of Life](#game-of-life)
+- [Sparse Matrix](#sparse-matrix)
 
 This is the documentation for the hands-on exercises in the ``Track 3: Data
-Intensive Computing and I/O'' portion of ATPESC 2021.  Agenda information
+Intensive Computing and I/O'' portion of ATPESC 2022.  Agenda information
 can be found here:
 
-[ATPESC 2021 Track 3 agenda](https://extremecomputingtraining.anl.gov/agenda-2021/#Track-3)
+[ATPESC 2022 Track 3 agenda](https://extremecomputingtraining.anl.gov/agenda-2022/#Track-3)
 
 We will describe these exercises in greater detail during the ATPESC
 lectures and provide hands-on support via the #io channel in Slack.  Feel
@@ -25,34 +26,29 @@ via an SSH terminal.
 
 ## Reservations
 
-ATPESC 2021 attendees will have access to a 64 node reservation on Theta
-(ALCF) and an 18 node reservation on Ascent (OLCF) from 9am to 6pm CT
+ATPESC 2022 attendees will have access to a 64 node reservation on Theta
+(ALCF) from Noon to 9pm CT
 to execute hands-on exercises as part of the I/O track.
 
-On Theta, submit your jobs to the `ATPESC2021` queue and the `ATPESC2021`
-allocation using the `-A ATPESC2021` and `-q ATPESC2021` options in your job
+On Theta, submit your jobs to the `ATPESC2022` queue and the `ATPESC2022`
+allocation using the `-A ATPESC2022` and `-q ATPESC2022` options in your job
 script or qsub command line.  You can use the
-/grand/projects/ATPESC2021/usr/
+/grand/projects/ATPESC2022/usr/
 directory for data storage; please create a subdirectory there based on your
 username to avoid conflicts with other users.
 
-On Ascent, submit your jobs in the GEN161 project using the `-P GEN161`
-options in your job script or bsub command line.
-
-## Initial setup (Theta or Ascent)
+## Initial setup (ALCF Theta)
 
 * Confirm account access if you haven't already (see presenters for
 details)
-* Log on to Theta or Ascent
-* Download the tutorial materials to your home directory.  Theta and Ascent are
-  completely different machines managed by different groups so if you plan on
-  trying out both, you'll have to repeat these steps on each machine.
+* Log on to Theta
+* Download the tutorial materials to your home directory.
   * `mkdir atpesc-io`
   * `cd atpesc-io`
   * `git clone https://github.com/radix-io/hands-on.git`
   * `cd hands-on`
 * Set up your environment to have access to the utilities needed for the hands-on exercises
-  * `source ./theta-setup-env.sh` or `./ascent-setup-env.sh`
+  * `source ./theta-setup-env.sh`
 
 ## Darshan
 
@@ -69,27 +65,12 @@ details on specific example programs)
 * Check the queue to see when your jobs complete
   * `qstat |grep <username>`
 * And/or wait for a specific job to complete with `cqwait <jobid>`
-* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2021/8/6/<username>*` (or whatever the current day is in GMT)
+* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2022/8/5/<username>*` (or whatever the current day is in GMT)
   * Copy log files to your home directory
 * Use `darshan-job-summary.pl` or `darshan-parser` to investigate Darshan
 characterization data
   * darshan-job-summary.pl will produce \*.pdf files with an analysis summary.
   * You can use scp to copy these to your laptop to view them, or run `evince *.pdf` on Theta to display them remotely over your ssh session it forwards X connections.
-
-### Darshan on Ascent
-
-On Theta, one can generate a darshan log file and the report all on one system.
-Ascent is missing a few packages for that. However,
-enterprising attendees can find their log files on Ascent in the
-`/gpfs/wolf/darshan/ascent/2021/8/6` directory and then move them to
-theta (or a laptop with the `darshan-util` package and necessary latex
-components) installed and generate the report there.
-
-On Ascent, use `mpicc` rather than `cc` to compile your executable, and submit
-batch jobs using `bsub` rather than `qsub`.  The project name to use on Ascent
-during ATPESC 2021 is GEN161 rather than ATPESC2021.  You can find an example
-bsub script hands-on/darshan/helloworld/helloworld.lsf.  It can be adapted for
-use with the other Darshan example programs.
 
 ### Hands-on exercise: helloworld
 
@@ -229,3 +210,14 @@ To give you an idea of how big a problem size to use, here are some run times fo
 * Experiment with Lustre stripe sizes on Theta.  When is a stripe width of 1 a
    good idea?
 
+## Sparse Matrix I/O
+
+A more sophisticated I/O example demonstrating non-contiguous I/O and
+abstraction layers.  Writing a sparse matrix to a file as an N-dimensional
+array can be wasteful for a very sparse matrix.  This example uses Compressed
+Sparse Row (CSR) representation to write out the file using MPI-IO routines and
+optimizations.
+
+### Project Ideas
+
+* The interface writes to MPI-IO.  Update it to use pnetcdf or hdf5
