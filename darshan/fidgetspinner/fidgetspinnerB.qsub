@@ -2,14 +2,14 @@
 #COBALT -n 4
 #COBALT -t 15
 #COBALT --mode script
-#COBALT -A ATPESC2021
-#COBALT -q ATPESC2021
+#COBALT -A ATPESC2022
+#COBALT -q ATPESC2022
 
 # make sure scratch dir exists
-mkdir -p /grand/projects/ATPESC2021/usr/$USER
+mkdir -p /grand/projects/ATPESC2022/usr/$USER
 
 # delete old file if present
-rm -rf /grand/projects/ATPESC2021/usr/$USER/fidgetspinnerB*
+rm -rf /grand/projects/ATPESC2022/usr/$USER/fidgetspinnerB*
 
 # submit job
-aprun -n 128 -N 32 ./fidgetspinnerB /grand/projects/ATPESC2021/usr/$USER/
+aprun -n 128 -N 32 ./fidgetspinnerB /grand/projects/ATPESC2022/usr/$USER/

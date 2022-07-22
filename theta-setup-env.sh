@@ -1,4 +1,4 @@
-# modules needed for ATPESC 2021 I/O examples on theta.alcf.anl.gov
+# modules needed for ATPESC 2022 I/O examples on theta.alcf.anl.gov
 module add cray-parallel-netcdf
 module add cray-hdf5-parallel
 module add cray-netcdf-hdf5parallel
