@@ -10,10 +10,17 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <string.h>
+#include <unistd.h>
 
 #define BUFSIZE    256*1024
 #define CMDSIZE    80
 #define MAXPATHLEN 256
+
+static int makehostlist( char spec[80], char filename[80], int *count )
+{
+
+}
 
 int main( int argc, char *argv[] )
 {
@@ -89,7 +96,4 @@ int main( int argc, char *argv[] )
     return 0;
 }
 
-int makehostlist( char spec[80], char filename[80] )
-{
 
-}

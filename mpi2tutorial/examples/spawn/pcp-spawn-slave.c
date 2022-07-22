@@ -10,6 +10,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <string.h>
+#include <unistd.h>
 
 #define BUFSIZE    256*1024
 #define CMDSIZE    80
