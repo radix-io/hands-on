@@ -11,7 +11,7 @@ CFLAGS  = @CFLAGS@
 
 default: csrio-mpiio.o
 
-all: mlife
+all: test1 test1-mpiio
 
 test1: test1.o csrio-stdout.o
 	$(MPICC) -o $@ $(LDFLAGS) test1.o csrio-stdout.o $(LIBS)

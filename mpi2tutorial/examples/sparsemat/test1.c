@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     }
 
     /* checkpoint */
-    err = CSRIO_Write("checkpoint.out", "test1", my_n * nprocs, my_nz,
+    err = CSRIO_Write(argv[1], "test1", my_n * nprocs, my_nz,
 		      nprocs * my_n, (nprocs + 1) * my_n - 1, my_ia,
 		      my_ja, my_a);
 
