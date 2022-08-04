@@ -2,8 +2,8 @@
 #COBALT -t 10
 #COBALT -n 2
 #COBALT --attrs mcdram=cache:numa=quad
-#COBALT -A ATPESC2021
-#COBALT -q ATPESC2021
+#COBALT -A ATPESC2022
+#COBALT -q ATPESC2022
 
 set -euo pipefail
 
@@ -19,7 +19,7 @@ export PATH=.:${PATH}
 
 APPLICATION=$1
 
-TRAINING_DIR=/grand/ATPESC2021/$USER
+TRAINING_DIR=/grand/ATPESC2022/$USER
 
 # shell expansion syntax: if there is no second argument, use the file name
 # 'testfile' as default value
