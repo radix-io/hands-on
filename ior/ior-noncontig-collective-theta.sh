@@ -39,3 +39,10 @@ done
 
 export  IOR_HINT__MPI__cray_cb_write_lock_mode=2
 export  IOR_HINT__MPI__cb_nodes_multiplier=4
+
+for segs in 1 100 1000 5000 10000; do
+   aprun -N 48 -n $((48*4)) \
+      ior --mpiio.showHints  -a MPIIO -c -w \
+           --mpiio.useFileView --mpiio.useStridedDatatype -b $((10000000/$segs)) -t $((10000000/$segs)) -s $segs \
+           -o ${OUTPUT}/ior-noncontig-coll-$segs.out
+done
