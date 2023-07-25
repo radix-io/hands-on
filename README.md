@@ -1,4 +1,4 @@
-# ATPESC 2022 hands-on I/O exercises and reference material
+# ATPESC 2023 hands-on I/O exercises and reference material
 
 # Table of Contents:
 - [Reservation](#reservation)
@@ -10,11 +10,11 @@
 - [Game of Life](#game-of-life)
 - [Sparse Matrix](#sparse-matrix)
 
-This is the documentation for the hands-on exercises in the ``Track 3: Data
-Intensive Computing and I/O'' portion of ATPESC 2022.  Agenda information
+This is the documentation for the hands-on exercises in the ``Track 7: Data
+Intensive Computing and I/O'' portion of ATPESC 2023.  Agenda information
 can be found here:
 
-[ATPESC 2022 Track 3 agenda](https://extremecomputingtraining.anl.gov/agenda-2022/#Track-3)
+[ATPESC 2023 Track 7 agenda](https://extremecomputingtraining.anl.gov/agenda-2023/#Track-7)
 
 We will describe these exercises in greater detail during the ATPESC
 lectures and provide hands-on support via the #io channel in Slack.  Feel
@@ -26,7 +26,7 @@ via an SSH terminal.
 
 ## Reservations
 
-ATPESC 2022 attendees will have access to a 64 node reservation on Theta
+ATPESC 2023 attendees will have access to a 64 node reservation on Theta
 (ALCF) from Noon to 9pm CT
 to execute hands-on exercises as part of the I/O track.
 
