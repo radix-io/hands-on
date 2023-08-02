@@ -26,36 +26,36 @@ via an SSH terminal.
 
 ## Reservations
 
-ATPESC 2023 attendees will have access to a 64 node reservation on Theta
-(ALCF) from Noon to 9pm CT
+ATPESC 2023 attendees will have access to a 128 node reservation on Polaris
+(ALCF) from 9am to 9pm CT
 to execute hands-on exercises as part of the I/O track.
 
-On Theta, submit your jobs to the `ATPESC2022` queue and the `ATPESC2022`
-allocation using the `-A ATPESC2022` and `-q ATPESC2022` options in your job
+On Polaris, submit your jobs to the `ATPESC2023` queue and the `ATPESC2023`
+allocation using the `-A ATPESC2023` and `-q ATPESC2023` options in your job
 script or qsub command line.  You can use the
-/grand/projects/ATPESC2022/usr/
+/grand/projects/ATPESC2023/usr/
 directory for data storage; please create a subdirectory there based on your
 username to avoid conflicts with other users.
 
-## Initial setup (ALCF Theta)
+## Initial setup (ALCF Polaris)
 
 * Confirm account access if you haven't already (see presenters for
 details)
-* Log on to Theta
+* Log on to Polaris
 * Download the tutorial materials to your home directory.
   * `mkdir atpesc-io`
   * `cd atpesc-io`
   * `git clone https://github.com/radix-io/hands-on.git`
   * `cd hands-on`
 * Set up your environment to have access to the utilities needed for the hands-on exercises
-  * `source ./theta-setup-env.sh`
+  * `source ./polaris-setup-env.sh`
 
 ## Darshan
 
 ### Running hands-on example programs
 
-All Darshan hands-on examples are set up for use on the Theta (ALCF) system.
-See the Theta setup instructions above to configure your baseline
+All Darshan hands-on examples are set up for use on the Polaris (ALCF) system.
+See the Polaris setup instructions above to configure your baseline
 environment.
 
 * Compile example programs and submit into the job queue (see below for
@@ -64,8 +64,7 @@ details on specific example programs)
   * `qsub ./<exampleprogram>.qsub`
 * Check the queue to see when your jobs complete
   * `qstat |grep <username>`
-* And/or wait for a specific job to complete with `cqwait <jobid>`
-* Look for log files in `/lus/theta-fs0/logs/darshan/theta/2022/8/5/<username>*` (or whatever the current day is in GMT)
+* Look for log files in `/lus/grand/logs/darshan/polaris/2023/8/10/<username>*` (or whatever the current day is in GMT)
   * Copy log files to your home directory
 * Use `darshan-job-summary.pl` or `darshan-parser` to investigate Darshan
 characterization data
