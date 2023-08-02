@@ -9,3 +9,6 @@ module add darshan
 
 # load a more recent Python version
 module add cray-python
+
+# point to PyDarshan install co-located with Darshan install
+export PYTHONPATH=/soft/perftools/darshan/darshan-3.4.3/python
