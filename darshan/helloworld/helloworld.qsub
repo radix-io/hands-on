@@ -1,20 +1,23 @@
 #!/bin/bash
-#COBALT -n 4
-#COBALT -t 15
-#COBALT --mode script
-#COBALT -A ATPESC2022
-#COBALT -q ATPESC2022
+#PBS -l select=4:system=polaris
+#PBS -l filesystems=home:grand
+#PBS -l walltime=0:15:00
+#PBS -A ATPESC2023
+#PBS -q R563923
+
+cd ${PBS_O_WORKDIR}
 
 # make sure scratch dir exists
-mkdir -p /grand/projects/ATPESC2022/usr/$USER
+SCRATCHDIR=/grand/projects/ATPESC2023/usr/$USER
+mkdir -p $SCRATCHDIR
 # set striping parameters to use all servers
-lfs setstripe -c -1 /grand/projects/ATPESC2022/usr/$USER
+lfs setstripe -c -1 $SCRATCHDIR
 
 # delete old file if present
-rm -rf /grand/projects/ATPESC2022/usr/$USER/helloworld
+rm -rf $SCRATCHDIR/helloworld
 
 # submit job
-aprun -n 256 -N 64 ./helloworld /grand/projects/ATPESC2022/usr/$USER/
+mpiexec -n 256 --ppn 64 ./helloworld $SCRATCHDIR
 
 # delete the new file to avoid exhausing the ATPESC quota
-rm -rf /grand/projects/ATPESC2022/usr/$USER/helloworld
+rm -rf $SCRATCHDIR/helloworld

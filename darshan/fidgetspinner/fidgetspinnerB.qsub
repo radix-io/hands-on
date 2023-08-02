@@ -1,15 +1,18 @@
 #!/bin/bash
-#COBALT -n 4
-#COBALT -t 15
-#COBALT --mode script
-#COBALT -A ATPESC2022
-#COBALT -q ATPESC2022
+#PBS -l select=4:system=polaris
+#PBS -l filesystems=home:grand
+#PBS -l walltime=0:15:00
+#PBS -A ATPESC2023
+#PBS -q R563923
+
+cd ${PBS_O_WORKDIR}
 
 # make sure scratch dir exists
-mkdir -p /grand/projects/ATPESC2022/usr/$USER
+SCRATCHDIR=/grand/projects/ATPESC2023/usr/$USER
+mkdir -p $SCRATCHDIR
 
 # delete old file if present
-rm -rf /grand/projects/ATPESC2022/usr/$USER/fidgetspinnerB*
+rm -rf $SCRATCHDIR/fidgetspinnerB*
 
 # submit job
-aprun -n 128 -N 32 ./fidgetspinnerB /grand/projects/ATPESC2022/usr/$USER/
+aprun -n 128 -N 32 ./fidgetspinnerB $SCRATCHDIR

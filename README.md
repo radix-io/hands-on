@@ -27,13 +27,12 @@ via an SSH terminal.
 ## Reservations
 
 ATPESC 2023 attendees will have access to a 128 node reservation on Polaris
-(ALCF) from 9am to 9pm CT
-to execute hands-on exercises as part of the I/O track.
+(ALCF) from 9am to 9pm CT to execute hands-on exercises as part of the I/O track.
 
-On Polaris, submit your jobs to the `ATPESC2023` queue and the `ATPESC2023`
-allocation using the `-A ATPESC2023` and `-q ATPESC2023` options in your job
-script or qsub command line.  You can use the
-/grand/projects/ATPESC2023/usr/
+On Polaris, submit your jobs to our reservation using the the `ATPESC2023`
+allocation and the `R563923` queue (`-A ATPESC2023` and `-q R563923` options,
+respectively, in your job script or qsub command line).
+You can use the /grand/projects/ATPESC2023/usr/
 directory for data storage; please create a subdirectory there based on your
 username to avoid conflicts with other users.
 
