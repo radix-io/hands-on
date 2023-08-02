@@ -73,10 +73,7 @@ static int example1A(const char* dir, int rank, int nprocs)
     char file_name[PATH_MAX];
     int ret;
     int fd;
-    char msg[MPI_MAX_ERROR_STRING];
-    int msg_len;
     char *buffer;
-	off_t offset;
     off_t i;
     struct stat statbuf;
     int j;
