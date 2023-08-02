@@ -53,4 +53,6 @@ int main(int argc, char **argv)
     int ret;
 
     ret = write_data("testfile");
+    if (ret != 0) return 0;
+    return -1;
 }
