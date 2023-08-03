@@ -7,7 +7,7 @@
 module swap PrgEnv-intel PrgEnv-gnu
 
 
-IOR=${HOME}/soft/cray/ior-main
+IOR=${HOME}/soft/cray/ior-4.0.0rc1
 PATH=${IOR}/bin:${PATH}
 OUTPUT=/grand/ATPESC2022/usr/$USER/ior
 
