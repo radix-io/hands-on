@@ -65,10 +65,10 @@ details on specific example programs)
   * `qstat |grep <username>`
 * Look for log files in `/lus/grand/logs/darshan/polaris/2023/8/10/<username>*` (or whatever the current day is in GMT)
   * Copy log files to your home directory
-* Use `darshan-job-summary.pl` or `darshan-parser` to investigate Darshan
+* Use the PyDarshan job summary tool or `darshan-parser` to investigate Darshan
 characterization data
-  * darshan-job-summary.pl will produce \*.pdf files with an analysis summary.
-  * You can use scp to copy these to your laptop to view them, or run `evince *.pdf` on Theta to display them remotely over your ssh session it forwards X connections.
+  * `python -m darshan summary <log_path>` command will produce \*.html files with an analysis summary
+  * You can use scp to copy these to your laptop to view them in a browser
 
 ### Hands-on exercise: helloworld
 
