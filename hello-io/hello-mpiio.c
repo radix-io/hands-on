@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     int rank, nprocs;
     MPI_Info info;
     MPI_Status status;
-    MPI_Offset offset, len;
+    MPI_Offset offset=0, len;
     char buf[BUFSIZE];
 
     MPI_Init(&argc, &argv);
