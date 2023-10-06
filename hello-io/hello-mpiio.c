@@ -37,8 +37,6 @@ int main(int argc, char **argv)
      * whenever amounts of data vary from process to process. */
     MPI_Exscan(&len, &offset, 1, MPI_OFFSET, MPI_SUM, MPI_COMM_WORLD);
 
-    printf("len: %lld  offset %lld\n", len, offset);
-
     MPI_CHECK(MPI_File_open(MPI_COMM_WORLD, argv[1],
                 MPI_MODE_CREATE|MPI_MODE_WRONLY, info, &fh));
 
