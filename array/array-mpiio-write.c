@@ -2,9 +2,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "array.h"
 #include "util.h"
 #include "mpi-util.h"
+
+#define NDIMS 2
+#define XDIM 5
+#define YDIM 1
+
+typedef struct {
+    int row;
+    int col;
+    int iter;
+} science;
 
 int write_data(MPI_Comm comm, char *filename)
 {
@@ -32,11 +41,11 @@ int write_data(MPI_Comm comm, char *filename)
     header.col = XDIM;
     header.iter = 1;
 
-    /* HANDS-ON: make rank 0 write the metadata */
 
     /* I've provided the call to MPI_File_set_view for you */
     MPI_CHECK(MPI_File_set_view(fh, sizeof(header),
                 MPI_INT, MPI_INT, "native", info));
+    /* HANDS-ON: make rank 0 write the metadata (the 'header' data) */
 
     /* HANDS-ON: Invoke MPI_File_write_at_all so every process can collectively
      * write their array. */
