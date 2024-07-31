@@ -21,7 +21,8 @@
 #include <getopt.h>
 #include <limits.h>
 
-#define IOSIZE 200000
+#define IOSIZE (1*1024*1024)
+#define IOITS  6
 
 static int example1A(const char* dir, int rank, int nprocs);
 
@@ -74,12 +75,15 @@ static int example1A(const char* dir, int rank, int nprocs)
     MPI_File fh;
     char msg[MPI_MAX_ERROR_STRING];
     int msg_len;
+    size_t buffer_size;
     char *buffer;
     MPI_Status status;
-	MPI_Offset offset;
+    size_t io_size = IOSIZE;
+    MPI_Offset phase_offset, my_offset;
     MPI_Offset i;
 
-    buffer = malloc(IOSIZE);
+    buffer_size = IOSIZE * (1 << (IOITS - 1));
+    buffer = malloc(buffer_size);
 
     sprintf(file_name, "%s/helloworld", dir);
 
@@ -93,15 +97,14 @@ static int example1A(const char* dir, int rank, int nprocs)
         return(-1);
     }
 
-	for(i=0; i<512; i++)
-	{
-		/* skip ahead in file for each round of I/O */
-		offset = (MPI_Offset)nprocs*i*IOSIZE;
-		/* skip ahead to offset for this process' data */
-		offset += (MPI_Offset)rank*IOSIZE;
-
-        ret = MPI_File_write_at_all(fh, offset, buffer, IOSIZE, MPI_CHAR, 
+    phase_offset = 0;
+    for(i=0; i<IOITS; i++)
+    {
+        /* skip ahead to offset for this process' data */
+        my_offset = phase_offset + (MPI_Offset)rank*io_size;
+        ret = MPI_File_write_at_all(fh, my_offset, buffer, io_size, MPI_CHAR,
             &status);
+        //fprintf(stderr, "rank %d: writing %lu @ %lu\n", rank, io_size, my_offset);
         if(ret != MPI_SUCCESS)
         {
             MPI_Error_string(ret, msg, &msg_len);
@@ -109,6 +112,15 @@ static int example1A(const char* dir, int rank, int nprocs)
             free(buffer);
             return(-1);
         }
+
+        /* sleep between iterations */
+        sleep(1);
+
+        /* skip ahead to next I/O phase offset */
+        phase_offset += (MPI_Offset)nprocs*io_size;
+
+        /* double access size for next iteration */
+        io_size *= 2;
     }
 
     ret = MPI_File_close(&fh);
