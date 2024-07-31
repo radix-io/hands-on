@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -A fallwkshp23
+#PBS -A ATPESC2024
 #PBS -l walltime=00:10:00
 #PBS -l select=1
 #PBS -l place=scatter
@@ -8,12 +8,20 @@
 #PBS -N hello-io
 #PBS -V
 
-mkdir -p /eagle/fallwkshp23/${USER}
+OUTPUT=/eagle/ATPESC2024/usr/${USER}/hello
+mkdir -p ${OUTPUT}
 
 NNODES=$(wc -l < $PBS_NODEFILE)
 NRANKS_PER_NODE=32
 NTOTRANKS=$(( NNODES * NRANKS_PER_NODE ))
 
 cd $PBS_O_WORKDIR
+
 mpiexec -n $NTOTRANKS --ppn $NRANKS_PER_NODE \
-	./hello-mpiio /eagle/fallwkshp23/${USER}/hello.out
+	./hello-mpiio ${OUTPUT}/hello.out
+
+mpiexec -n $NTOTRANKS --ppn $NRANKS_PER_NODE \
+	./hello-mpiio-noncontig ${OUTPUT}/hello-noncontig.out
+
+mpiexec -n $NTOTRANKS --ppn $NRANKS_PER_NODE \
+	./hello-mpiio-view ${OUTPUT}/hello-view.out

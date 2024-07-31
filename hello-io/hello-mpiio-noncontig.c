@@ -23,7 +23,7 @@ int main(int argc, char **argv)
     MPI_Offset offset=0, len;
     char buf[BUFSIZE];
 
-    MPI_Datatype etype, ftype, memtype;
+    MPI_Datatype memtype;
     MPI_Count memtype_size;
 
     MPI_Init(&argc, &argv);

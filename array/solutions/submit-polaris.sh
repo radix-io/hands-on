@@ -1,7 +1,7 @@
 #!/bin/bash -l
-#PBS -A ATPESC2023
+#PBS -A ATPESC2024
 #PBS -l walltime=00:10:00
-#PBS -l select=1
+#PBS -l select=2
 #PBS -l place=scatter
 #PBS -l filesystems=home:grand
 #PBS -q debug
@@ -19,7 +19,7 @@ cd $PBS_O_WORKDIR
 export PATH=.:${PATH}
 
 
-TRAINING_DIR=/grand/ATPESC2023/usr/$USER
+TRAINING_DIR=/eagle/ATPESC2024/usr/$USER
 
 # shell expansion syntax: if there is no second argument, use the file name
 # 'testfile' as default value
