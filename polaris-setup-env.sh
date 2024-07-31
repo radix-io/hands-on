@@ -7,5 +7,5 @@ module add darshan
 # load a more recent Python version
 module add cray-python
 
-# point to PyDarshan install co-located with Darshan install
-export PYTHONPATH=/soft/perftools/darshan/darshan-3.4.3/python
+# point to manual PyDarshan install in ATPESC scratch space
+export PYTHONPATH=/eagle/projects/ATPESC2024/usr/soft/track-7-io/pydarshan:$PYTHONPATH
