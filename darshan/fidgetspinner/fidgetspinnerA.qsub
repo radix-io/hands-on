@@ -1,14 +1,14 @@
 #!/bin/bash
 #PBS -l select=4:system=polaris
-#PBS -l filesystems=home:grand
+#PBS -l filesystems=home:eagle
 #PBS -l walltime=0:15:00
-#PBS -A ATPESC2023
-#PBS -q R563923
+#PBS -A ATPESC2024
+#PBS -q R2035676
 
 cd ${PBS_O_WORKDIR}
 
 # make sure scratch dir exists
-SCRATCHDIR=/grand/projects/ATPESC2023/usr/$USER
+SCRATCHDIR=/eagle/projects/ATPESC2023/usr/$USER
 mkdir -p $SCRATCHDIR
 
 # delete old file if present
