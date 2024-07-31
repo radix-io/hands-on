@@ -8,7 +8,7 @@
 cd ${PBS_O_WORKDIR}
 
 # make sure scratch dir exists
-SCRATCHDIR=/eagle/projects/ATPESC2023/usr/$USER
+SCRATCHDIR=/eagle/projects/ATPESC2024/usr/$USER
 mkdir -p $SCRATCHDIR
 
 # delete old file if present
