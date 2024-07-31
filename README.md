@@ -1,4 +1,4 @@
-# ATPESC 2023 hands-on I/O exercises and reference material
+# ATPESC 2024 hands-on I/O exercises and reference material
 
 # Table of Contents:
 - [Reservation](#reservation)
@@ -11,10 +11,10 @@
 - [Sparse Matrix](#sparse-matrix)
 
 This is the documentation for the hands-on exercises in the ``Track 7: Data
-Intensive Computing and I/O'' portion of ATPESC 2023.  Agenda information
+Intensive Computing and I/O'' portion of ATPESC 2024.  Agenda information
 can be found here:
 
-[ATPESC 2023 Track 7 agenda](https://extremecomputingtraining.anl.gov/agenda-2023/#Track-7)
+[ATPESC 2024 Track 7 agenda](https://extremecomputingtraining.anl.gov/agenda-2024/#Track-7)
 
 We will describe these exercises in greater detail during the ATPESC
 lectures and provide hands-on support via the #io channel in Slack.  Feel
@@ -26,13 +26,13 @@ via an SSH terminal.
 
 ## Reservations
 
-ATPESC 2023 attendees will have access to a 128 node reservation on Polaris
+ATPESC 2024 attendees will have access to a 300 node reservation on Polaris
 (ALCF) from 9am to 9pm CT to execute hands-on exercises as part of the I/O track.
 
-On Polaris, submit your jobs to our reservation using the the `ATPESC2023`
-allocation and the `R563923` queue (`-A ATPESC2023` and `-q R563923` options,
+On Polaris, submit your jobs to our reservation using the the `ATPESC2024`
+allocation and the `R2035676` queue (`-A ATPESC2024` and `-q R2035676` options,
 respectively, in your job script or qsub command line).
-You can use the /grand/projects/ATPESC2023/usr/
+You can use the /eagle/projects/ATPESC2024/usr/
 directory for data storage; please create a subdirectory there based on your
 username to avoid conflicts with other users.
 
@@ -63,7 +63,7 @@ details on specific example programs)
   * `qsub ./<exampleprogram>.qsub`
 * Check the queue to see when your jobs complete
   * `qstat |grep <username>`
-* Look for log files in `/lus/grand/logs/darshan/polaris/2023/8/10/<username>*` (or whatever the current day is in GMT)
+* Look for log files in `/lus/grand/logs/darshan/polaris/2024/8/8/<username>*` (or whatever the current day is in UTC)
   * Copy log files to your home directory
 * Use the PyDarshan job summary tool or `darshan-parser` to investigate Darshan
 characterization data
