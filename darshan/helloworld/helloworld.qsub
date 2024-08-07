@@ -3,7 +3,7 @@
 #PBS -l filesystems=home:eagle
 #PBS -l walltime=0:15:00
 #PBS -A ATPESC2024
-#PBS -q R2035676
+#PBS -q ATPESC
 
 cd ${PBS_O_WORKDIR}
 

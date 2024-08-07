@@ -30,7 +30,7 @@ ATPESC 2024 attendees will have access to a 300 node reservation on Polaris
 (ALCF) from 9am to 9pm CT to execute hands-on exercises as part of the I/O track.
 
 On Polaris, submit your jobs to our reservation using the the `ATPESC2024`
-allocation and the `R2035676` queue (`-A ATPESC2024` and `-q R2035676` options,
+allocation and the `ATPESC` queue (`-A ATPESC2024` and `-q ATPESC` options,
 respectively, in your job script or qsub command line).
 You can use the /eagle/projects/ATPESC2024/usr/
 directory for data storage; please create a subdirectory there based on your
