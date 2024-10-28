@@ -8,7 +8,6 @@
 #PBS -N hello-io
 #PBS -V
 
-#OUTPUT=/eagle/ATPESC2024/usr/${USER}/hello
 OUTPUT=/eagle/radix-io/${USER}/hello
 mkdir -p ${OUTPUT}
 
@@ -18,11 +17,5 @@ NTOTRANKS=$(( NNODES * NRANKS_PER_NODE ))
 
 cd $PBS_O_WORKDIR
 
-mpiexec -n $NTOTRANKS --ppn $NRANKS_PER_NODE \
-	./hello-mpiio ${OUTPUT}/hello.out
-
-mpiexec -n $NTOTRANKS --ppn $NRANKS_PER_NODE \
-	./hello-mpiio-noncontig ${OUTPUT}/hello-noncontig.out
-
-mpiexec -n $NTOTRANKS --ppn $NRANKS_PER_NODE \
-	./hello-mpiio-view ${OUTPUT}/hello-view.out
+mpiexec -n $NTOTRANKS -ppn $NRANKS_PER_NODE \
+	./hello-pnetcdf ${OUTPUT}/hello-pnetcdf.nc
