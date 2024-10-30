@@ -23,6 +23,11 @@ CPPFLAGS=-I${PNETCDF}/include
 hello-pnetcdf: hello-pnetcdf.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -I${PNETCDF}/include $^ -o $@ -L${PNETCDF}/lib -lpnetcdf
 
+HDF5=/usr
+CPPFLAGS=-I${HDF5}/include
+hello-hdf5: hello-hdf5.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I${HDF5}/include $^ -o $@ -L${HDF5}/lib -lhdf5
+
 
 clean:
 	rm -f hello-mpiio hello-mpiio-noncontig hello-mpiio-view hello-pnetcdf
