@@ -1,4 +1,4 @@
-# ATPESC 2024 hands-on I/O exercises and reference material
+# ATPESC 2025 hands-on I/O exercises and reference material
 
 # Table of Contents:
 - [Reservation](#reservation)
@@ -11,10 +11,10 @@
 - [Sparse Matrix](#sparse-matrix)
 
 This is the documentation for the hands-on exercises in the ``Track 7: Data
-Intensive Computing and I/O'' portion of ATPESC 2024.  Agenda information
+Intensive Computing and I/O'' portion of ATPESC 2025.  Agenda information
 can be found here:
 
-[ATPESC 2024 Track 7 agenda](https://extremecomputingtraining.anl.gov/agenda-2024/#Track-7)
+[ATPESC 2025 Track 7 agenda](https://extremecomputingtraining.anl.gov/agenda-2025/#Track-7)
 
 We will describe these exercises in greater detail during the ATPESC
 lectures and provide hands-on support via the #io channel in Slack.  Feel
@@ -26,13 +26,13 @@ via an SSH terminal.
 
 ## Reservations
 
-ATPESC 2024 attendees will have access to a 300 node reservation on Polaris
+ATPESC 2025 attendees will have access to a 300 node reservation on Polaris
 (ALCF) from 9am to 9pm CT to execute hands-on exercises as part of the I/O track.
 
-On Polaris, submit your jobs to our reservation using the the `ATPESC2024`
-allocation and the `ATPESC` queue (`-A ATPESC2024` and `-q ATPESC` options,
+On Polaris, submit your jobs to our reservation using the the `ATPESC2025`
+allocation and the `ATPESC` queue (`-A ATPESC2025` and `-q ATPESC` options,
 respectively, in your job script or qsub command line).
-You can use the /eagle/projects/ATPESC2024/usr/
+You can use the /eagle/projects/ATPESC2025/usr/
 directory for data storage; please create a subdirectory there based on your
 username to avoid conflicts with other users.
 
@@ -63,7 +63,7 @@ details on specific example programs)
   * `qsub ./<exampleprogram>.qsub`
 * Check the queue to see when your jobs complete
   * `qstat |grep <username>`
-* Look for log files in `/lus/grand/logs/darshan/polaris/2024/8/8/<username>*` (or whatever the current day is in UTC)
+* Look for log files in `/lus/grand/logs/darshan/polaris/2025/8/8/<username>*` (or whatever the current day is in UTC)
   * Copy log files to your home directory
 * Use the PyDarshan job summary tool or `darshan-parser` to investigate Darshan
 characterization data
@@ -101,6 +101,12 @@ fidgetspinnerA and fidgetspinnerB.  Both of them do the same amount of
 I/O from each process, but one of them performs better than the other.
 Which one has the fastest I/O?  Why?
 
+## hello-io
+
+Here's a quick introduction to both the MPI-IO interface and how to run
+programs on these machines.  Demonstrates basic MPI datatype usage to describe
+noncontiguous accesses in both memory and file.
+
 ## Array
 
 The presentation will walk you through several interfaces for writing an array
@@ -130,15 +136,15 @@ If you look in variance.qsub you will see that the job is a script job that exec
 ## Parallel-NetCDF
 
 You can install Parallel-NetCDF on your laptop easily enough if you already
-have MPI installed.  On Theta or Ascent, the setup script will load the
+have MPI installed.  On Polaris or Aurora, the setup script will load the
 necessary modules.  The Parallel-NetCDF projet has a
-[Quick Tutorial](http://trac.mcs.anl.gov/projects/parallel-netcdf/wiki/QuickTutorial)
+[Quick Tutorial](https://parallel-netcdf.github.io/wiki/QuickTutorial.html)
 outlining several different ways one can do I/O with Parallel-NetCDF.  We'll
 also explore attributes.
 
 ### Hands-on exercise: comparing I/O approaches
 * The
- [QuickTutorial](http://trac.mcs.anl.gov/projects/parallel-netcdf/wiki/QuickTutorial)
+ [QuickTutorial](https://parallel-netcdf.github.io/wiki/QuickTutorial.html)
  has links to code and some brief discussions about what the
  examples are trying to demonstrate.
 * Following the "Real parallel I/O on
@@ -162,9 +168,8 @@ experiment with I/O and do not already have a program handy.
 
 ### Building Notes
 
-For Theta, cnfigure might pick up the right
-MPI libraries automatically, but you can explicitly set MPICC and MPIF77 if it
-does not.  Also, put configure into cross-compile mode with the `--host` flag so it does not try to run compute node code on the front end.
+For Aurora, configure might pick up the right
+MPI libraries automatically, but if it does not you can explicitly set the MPICC and MPIF77 environment variables.
 
     $ module add cray-parallel-netcdf
     $ configure --with-pnetcdf=$PARALLEL_NETCDF_DIR \
