@@ -1,2 +1,9 @@
 mpi2tutorial/build
 *.o
+array/solutions/*.error
+array/solutions/*.output
+*.cobaltlog
+ior/theta/*.output
+ior/theta/*.error
+ior/polaris/*.o*
+ior/polaris/*.e*
