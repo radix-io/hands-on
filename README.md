@@ -24,17 +24,24 @@ The attendees are required to have a laptop with a working web browser and
 SSH client. For the purpose of this tutorial, all exercises can be performed
 via an SSH terminal.
 
-## Reservations
+## Reservations and file storage locations
 
-ATPESC 2025 attendees will have access to a 300 node reservation on Polaris
-(ALCF) from 9am to 9pm CT to execute hands-on exercises as part of the I/O track.
+ATPESC 2025 attendees will have access to reservations on both the Aurora and
+Polaris systems from 9am to 9pm CT to execute hands-on exercises as part of the
+I/O track:
+* Aurora (preferred): 9AM-9PM 512 nodes QUEUE: ATPESC
+* Polaris: 9AM-9PM 300 nodes QUEUE: ATPESC
 
-On Polaris, submit your jobs to our reservation using the the `ATPESC2025`
+Submit your jobs to our reservation using the the `ATPESC2025`
 allocation and the `ATPESC` queue (`-A ATPESC2025` and `-q ATPESC` options,
 respectively, in your job script or qsub command line).
-You can use the /eagle/projects/ATPESC2025/usr/
-directory for data storage; please create a subdirectory there based on your
-username to avoid conflicts with other users.
+
+You can store data in the `/flare/ATPESC2025/` directory on Aurora or the
+`/eagle/ATPESC2025/` directory on Polaris.  Please create subdirectories based
+on your username to avoid conflicts with other ATPESC attendees.  Users on Aurora also have access to a DAOS storage pool as well, which will be covered during the DAOS session.
+
+Note that Aurora and Polaris use separate file systems, so if you wish to move
+data between the two you must use Globus or scp to copy data.
 
 ## Initial setup (ALCF Polaris)
 
