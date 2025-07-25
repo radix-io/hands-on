@@ -9,4 +9,4 @@ module use /flare/ATPESC2025/track7-io/modulefiles/
 module load darshan-runtime/3.4.7
 
 # point to manual PyDarshan install in ATPESC scratch space
-export PYTHONPATH="/flare/ATPESC2025/track7-io/soft/pydarsan-3.4.7/lib/python3.11/site-packages/:$PYTHONPATH"
+export PYTHONPATH="/flare/ATPESC2025/track7-io/soft/pydarshan-3.4.7/lib/python3.10/site-packages/:$PYTHONPATH"
