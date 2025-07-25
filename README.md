@@ -43,7 +43,26 @@ on your username to avoid conflicts with other ATPESC attendees.  Users on Auror
 Note that Aurora and Polaris use separate file systems, so if you wish to move
 data between the two you must use Globus or scp to copy data.
 
+## Initial setup (ALCF Aurora)
+
+Note that Aurora is the preferred platform for ATPESC 2025 exercises, but you
+are also welcome to use Polaris.  Note that DAOS is only available on Aurora.
+
+* Confirm account access if you haven't already (see presenters for
+details)
+* Log on to Aurora
+* Download the tutorial materials to your home directory.
+  * `mkdir atpesc-io`
+  * `cd atpesc-io`
+  * `git clone https://github.com/radix-io/hands-on.git`
+  * `cd hands-on`
+* Set up your environment to have access to the utilities needed for the hands-on exercises
+  * `source ./aurora-setup-env.sh`
+
 ## Initial setup (ALCF Polaris)
+
+Note that Aurora is the preferred platform for ATPESC 2025 exercises, but you
+are also welcome to use Polaris.  Note that DAOS is only available on Aurora.
 
 * Confirm account access if you haven't already (see presenters for
 details)
