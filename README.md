@@ -79,17 +79,17 @@ details)
 
 ### Running hands-on example programs
 
-All Darshan hands-on examples are set up for use on the Polaris (ALCF) system.
-See the Polaris setup instructions above to configure your baseline
+All Darshan hands-on examples are set up for use on the Aurora (ALCF) system.
+See the Aurora setup instructions above to configure your baseline
 environment.
 
 * Compile example programs and submit into the job queue (see below for
 details on specific example programs)
-  * `cc <exampleprogram>.c -o <exampleprogram>`
-  * `qsub ./<exampleprogram>.qsub`
+  * `mpicc <exampleprogram>.c -o <exampleprogram>`
+  * `qsub ./<exampleprogram>-aurora.qsub`
 * Check the queue to see when your jobs complete
   * `qstat |grep <username>`
-* Look for log files in `/lus/grand/logs/darshan/polaris/2025/8/8/<username>*` (or whatever the current day is in UTC)
+* Look for log files in ` /lus/flare/logs/darshan/aurora/2025/8/8/<username>*` (or whatever the current day is in UTC)
   * Copy log files to your home directory
 * Use the PyDarshan job summary tool or `darshan-parser` to investigate Darshan
 characterization data
