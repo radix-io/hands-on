@@ -1,0 +1,24 @@
+#!/bin/bash
+#PBS -l select=4
+#PBS -l place=scatter
+#PBS -l filesystems=home:flare
+#PBS -l walltime=0:30:00
+#PBS -A ATPESC2025
+#PBS -q ATPESC
+
+cd ${PBS_O_WORKDIR}
+
+# make sure scratch dir exists
+for i in `seq 1 5`; do
+    mkdir -p /flare/ATPESC2025/usr/$USER/$i
+done
+
+# delete old file if present
+for i in `seq 1 5`; do
+    rm -rf /flare/ATPESC2025/usr/$USER/$i/variance*
+done
+
+# submit job
+for i in `seq 1 5`; do
+    mpiexec -n 408 --ppn 102 --cpu-bind core ./variance /flare/ATPESC2025/usr/$USER/$i
+done

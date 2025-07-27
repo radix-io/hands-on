@@ -1,18 +1,19 @@
 #!/bin/bash
-#PBS -l select=4:system=polaris
-#PBS -l filesystems=home:eagle
+#PBS -l select=4
+#PBS -l place=scatter
+#PBS -l filesystems=home:flare
 #PBS -l walltime=0:15:00
-#PBS -A ATPESC2024
+#PBS -A ATPESC2025
 #PBS -q ATPESC
 
 cd ${PBS_O_WORKDIR}
 
 # make sure scratch dir exists
-SCRATCHDIR=/eagle/projects/ATPESC2024/usr/$USER
+SCRATCHDIR=/flare/ATPESC2025/usr/$USER
 mkdir -p $SCRATCHDIR
 
 # delete old file if present
 rm -rf $SCRATCHDIR/fidgetspinnerA*
 
 # submit job
-aprun -n 128 -N 32 ./fidgetspinnerA $SCRATCHDIR
+mpiexec -n 408 --ppn 102 --cpu-bind core ./fidgetspinnerA $SCRATCHDIR

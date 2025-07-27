@@ -1,14 +1,15 @@
 #!/bin/bash
-#PBS -l select=4:system=polaris
-#PBS -l filesystems=home:eagle
+#PBS -l select=4
+#PBS -l place=scatter
+#PBS -l filesystems=home:flare
 #PBS -l walltime=0:15:00
-#PBS -A ATPESC2024
+#PBS -A ATPESC2025
 #PBS -q ATPESC
 
 cd ${PBS_O_WORKDIR}
 
 # make sure scratch dir exists
-SCRATCHDIR=/eagle/projects/ATPESC2024/usr/$USER
+SCRATCHDIR=/flare/ATPESC2025/usr/$USER
 mkdir -p $SCRATCHDIR
 # set striping parameters to use all servers
 lfs setstripe -c -1 $SCRATCHDIR
@@ -17,7 +18,7 @@ lfs setstripe -c -1 $SCRATCHDIR
 rm -rf $SCRATCHDIR/warpdriveB
 
 # submit job
-mpiexec -n 256 --ppn 64 ./warpdriveB $SCRATCHDIR
+mpiexec -n 408 --ppn 102 --cpu-bind core ./warpdriveB $SCRATCHDIR
 
 # delete new file to avoid exhausting ATPESC quota
 rm -rf $SCRATCHDIR/warpdriveB
