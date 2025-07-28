@@ -11,7 +11,7 @@ CPPFLAGS=-I${PNETCDF}/include
 # for generating slides
 CTORTF=../../mpi2tutorial/maint/ctortf
 
-PROGRAMS=description posix master\
+PROGRAMS=posix master\
 	array-mpiio-write array-mpiio-write-read \
 	array-pnetcdf-write array-pnetcdf-write-read\
 	array-pnetcdf-op-combine
