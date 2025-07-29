@@ -4,9 +4,9 @@
 # case.  If you went and build your own pnetcdf and installed it into your,
 # say, $HOME/soft directory, then you can modify this line.
 PNETCDF=/usr
-MPICC=cc
+MPICC=mpicc
 
-CC=cc
+CC=gcc
 CPPFLAGS=-I${PNETCDF}/include
 # for generating slides
 CTORTF=../../mpi2tutorial/maint/ctortf
