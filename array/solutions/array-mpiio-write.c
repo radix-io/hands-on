@@ -35,6 +35,13 @@ int write_data(MPI_Comm comm, char *filename)
     MPI_Comm_rank(comm, &rank);
     MPI_Comm_size(comm, &nprocs);
 
+    /* try this both ways:  if "automatic" -- the default -- ROMIO will see
+     * these requests are not "interleaved" and will just take the independent
+     * contiguous path.
+     *
+     * You can turn off collective I/O and force independent I/O with "disable"
+     */
+    MPI_Info_set(info, "romio_cb_write", "enable");
     MPI_CHECK(MPI_File_open(comm, filename,
                 MPI_MODE_CREATE|MPI_MODE_WRONLY, info, &fh));
 
