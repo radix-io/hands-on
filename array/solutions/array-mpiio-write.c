@@ -2,9 +2,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "array.h"
 #include "util.h"
 #include "mpi-util.h"
+
+#define NDIMS 2
+#define XDIM 5
+#define YDIM 1
+
+/* MPI-IO will move bytes for you but it won't do anything to describe the data
+ * or give you any clue how it is structred.  This small struct is one way to
+ * capture that structure: it describes the shape of the two-dimensional array
+ * (row by col).  The third "iter" member describes which iteration of this
+ * simulation is being captured.  You could imagine more sophisticated
+ * descriptions: this is only a toy demonstration */
+typedef struct {
+    int row;
+    int col;
+    int iter;
+} Science;
 
 int write_data(MPI_Comm comm, char *filename)
 {
@@ -12,7 +27,7 @@ int write_data(MPI_Comm comm, char *filename)
     MPI_Info info;
     int *values;
     int rank, nprocs;
-    science header;
+    Science header;
 
 
     MPI_Info_create(&info);
