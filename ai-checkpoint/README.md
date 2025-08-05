@@ -12,7 +12,7 @@ These examples are setup for use in NERSC's Perlmutter system. Use in other syst
   * `mkdir atpesc-io`
   * `cd atpesc-io`
   * `git clone https://github.com/radix-io/hands-on.git`
-  * `cd hands-on`
+  * `cd hands-on/ai-checkpoint`
 
 ## Hands-On
 
