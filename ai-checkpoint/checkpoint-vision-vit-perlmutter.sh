@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH -N 1
 #SBATCH -C gpu
-#SBATCH --ntasks-per-node=4
-#SBATCH --cpus-per-task=32
+#SBATCH --gpus 4
 #SBATCH --gpus-per-node=4
 #SBATCH --time 30
-#SBATCH -J trn015
+#SBATCH -q debug
+#SBATCH -A trn015
 #SBATCH -o %x-%j.out
 
 # setup software
