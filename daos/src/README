@@ -1,0 +1,55 @@
+README
+------
+
+# hello, world
+This small program just initialize and finalizes the DAOS library and validates you can build DAOS.
+
+# Simple test cases
+The following test cases all write and read a simple file encoded with an array that contains validation data.
+All of the following applications use the same format so will interoperate with each other.
+The write output of one application can be used with the read of another.
+As an example, the dfs-write data can be read and validated by the mpiio-read application.
+The programs expect the environment variables DAOS_POOL and DAOS_CONT set to find the DAOS pool and container information.
+
+## MPI-IO
+The mpiio-{write,read} progams will write some data with validation and then the read program will validate it on read back.
+This code is all generic MPI-IO code that has not DAOS specifics but the DAOS backend can be invoked by prepending "daos:" to the filename.
+You can change the source to switch MPI-IO from using a generic I/O back versus the DAOS backend.
+
+  # will create a data file named 'testfile'
+  ./mpiio-write
+
+  # will read a data file name 'testfile'
+  ./mpiio-read 
+  
+## POSIX
+The posix-{write,read} programs will write some data with validation and then read program will validate it on read back.
+POSIX code requires no changes and can be accelerated by using the Interception Library bypass.
+You can run the test codes with this set and unset to see the difference.
+
+  # will create a data file named 'testfile' via FUSE
+  ./posix-write
+
+  # will create a data file named 'testfile' via DAOS interception library
+  LD_PRELOAD=$DAOS_PRELOAD ./posix-write
+
+  # will read a data file named 'testfile' via FUSE
+  ./posix-read
+
+  # will read a data file named 'testfile' via DAOS interception library
+  LD_PRELOAD=$DAOS_PRELOAD ./posix-read
+
+
+## DFS
+The dfs-{write,read} programs will write some data with validation and then read program will validate it on read back.
+The DFS code demonstrates how to use a native DAOS API and requires writing to application I/O to utilize it.
+The DFS API is closely aligned with the POSIX API so porting should be straightforward.
+
+  # will create a data file named 'testfile' via DFS
+  ./dfs-write
+
+  # will read a data file named 'testfile' via DFS
+
+# Build
+Run `make` to build all targets.
+
