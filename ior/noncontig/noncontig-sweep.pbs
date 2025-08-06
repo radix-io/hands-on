@@ -1,0 +1,57 @@
+#!/bin/bash
+#PBS -l select=2
+#PBS -A radix-io
+#PBS -l walltime=00:15:00
+#PBS -N noncontig
+#PBS -k doe
+#PBS -j oe
+#PBS -l daos=default
+#PBS -l filesystems=flare:daos_user_fs
+#PBS -V
+
+cd ${PBS_O_WORKDIR}
+
+#NNODES=`wc -l < $PBS_NODEFILE`
+NNODES=1
+NRANKS=96          # Number of MPI ranks per node
+NDEPTH=1        # Number of hardware threads per rank, spacing between MPI ranks on a node
+NTOTRANKS=$(( NNODES * NRANKS ))
+
+# comment out if using default daos_user
+#module load daos_perf
+module load daos
+
+DAOS_POOL=radix-io
+DAOS_CONT=segments-test
+
+daos container destroy $DAOS_POOL $DAOS_CONT
+daos container create --type=POSIX  --chunk-size=2097152  --properties=rd_fac:2,ec_cell_sz:131072,cksum:crc32,srv_cksum:on $DAOS_POOL $DAOS_CONT
+
+launch-dfuse.sh ${DAOS_POOL}:${DAOS_CONT}
+
+
+IOR=${HOME}/soft/ior
+export PATH=${IOR}/bin:${PATH}
+
+# first four cores on each cpu are os-dedicated
+binding="list:4:56:5:57:6:58:7:59:8:60:9:61:10:62:11:63:12:64:13:65:14:66:15:67:16:68:17:69:18:70:19:71:20:72:21:73:22:74:23:75:24:76:25:77:26:78:27:79:28:80:29:81:30:82:31:83:32:84:33:85:34:86:35:87:36:88:37:89:38:90:39:91:40:92:41:93:42:94:43:95:44:96:45:97:46:98:47:99:48:100:49:101:50:102:51:103"
+
+
+export LD_PRELOAD=${DARSHAN_RUNTIME_ROOT}/lib/libdarshan.so
+
+# collective i/o:
+#mpiexec -n ${NTOTRANKS} --ppn ${NRANKS} --no-vni --envall -cpu-bind ${binding} \
+#	ior -c --mpiio.useStridedDatatype --mpiio.useFileView -w -f ${PBS_O_WORKDIR}/noncontig.conf -o daos:/tmp/${DAOS_POOL}/${DAOS_CONT}/ior-noncontig-coll.out > daos-collective.out
+
+# collective I/O with tuning
+# if we ask for more aggregators-per-node we can potentially use more network links and see higher performance
+#export IOR_HINT__MPI__cb_config_list="*:8"
+#mpiexec -n ${NTOTRANKS} --ppn ${NRANKS} --no-vni --envall -cpu-bind ${binding} \
+#	ior -c --mpiio.useStridedDatatype --mpiio.useFileView -w -f ${PBS_O_WORKDIR}/noncontig.conf -o daos:/tmp/${DAOS_POOL}/${DAOS_CONT}/ior-noncontig-coll.out > daos-collective-tuned.out
+
+# independent i/o (should use daos's list-io)
+mpiexec -n ${NTOTRANKS} --ppn ${NRANKS} --no-vni --envall -cpu-bind ${binding} \
+	ior --mpiio.useStridedDatatype --mpiio.useFileView -w -f ${PBS_O_WORKDIR}/noncontig.conf -o daos:/tmp/${DAOS_POOL}/${DAOS_CONT}/ior-noncontig-coll.out
+
+daos pool query $DAOS_POOL
+daos cont get-attr --path=/tmp/ATPESC2025/segments-test/ior-noncontig-coll.out
