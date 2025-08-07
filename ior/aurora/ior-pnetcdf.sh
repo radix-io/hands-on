@@ -37,6 +37,8 @@ launch-dfuse.sh ${DAOS_POOL}:${DAOS_CONT}
 
 
 export IOR_HINT__MPI__cb_config_list="*:8"
+export IOR_HINT__MPI__romio_cb_write="enable"
+export IOR_HINT__MPI__romio_cb_read="enable"
 export LD_PRELOAD=${DARSHAN_RUNTIME_ROOT}/lib/libdarshan.so
 mpiexec -n ${NTOTRANKS} --ppn ${NRANKS} --no-vni --envall -cpu-bind ${binding} \
   ior --mpiio.showHints --ncmpi.showHints -c -a NCMPI \
