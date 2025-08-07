@@ -6,7 +6,7 @@
 #PBS -lfilesystems=home:daos_user_fs
 
 #
-# qsub --env DAOS_POOL=ATPESC2025 --env DAOS_CONT=daos-example ./job-posix.sh
+# qsub -v DAOS_POOL=ATPESC2025,DAOS_CONT=${USER}_cont ./job-posix.sh
 
 #
 # Test case for POSIX FUSE code example
@@ -68,17 +68,17 @@ mpiexec -np $((rpn*nnodes)) \
 	-ppn $rpn \
 	-d $threads \
 	--cpu-bind numa \
-	--no-vni \   # The most important thing!
-	-genvall \
-	$HOME/${USER}_cont/hands-on/src/posix-write
+	--no-vni \
+	--genvall \
+	/tmp/${DAOS_POOL}/${DAOS_CONT}/daos/src/posix-write
 
 echo "read"
 mpiexec -np $((rpn*nnodes)) \
 	-ppn $rpn \
 	-d $threads \
 	--cpu-bind numa \
-	--no-vni \ # The most important thing!
-	-genvall \
-	$HOME/${USER}_cont/hands-on/src/posix-read
+	--no-vni \
+	--genvall \
+	/tmp/${DAOS_POOL}/${DAOS_CONT}/daos/src/posix-read
 
 exit 0

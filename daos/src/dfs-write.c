@@ -44,9 +44,8 @@ int write_data(char *filename, dfs_t *dfs)
 
     if (rank == 0)
     {
-    //obj_class = OC_EC2P1GX;
-    daos_oclass_id_t obj_class = OC_SX;
-    int chunk_size = 512*1024;
+    daos_oclass_id_t obj_class = OC_EC_8P2GX;;
+    int chunk_size = 1024*1024;
     ret = dfs_open(dfs, NULL, filename, S_IFREG|S_IRUSR|S_IWUSR,
                    O_CREAT|O_WRONLY,
                   obj_class, chunk_size, NULL, &obj);
