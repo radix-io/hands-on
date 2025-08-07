@@ -1,11 +1,13 @@
 #!/bin/bash
-#PBS -A Aurora_deployment
+#PBS -A ATPESC2025
 #PBS -lselect=1
 #PBS -lwalltime=30:00
 #PBS -k doe
 #PBS -lfilesystems=home:daos_user_fs
 
 # Test case for DFS code example
+#
+# qsub -v DAOS_POOL=ATPESC2025,DAOS_CONT=${USER}_cont ./job-dfs.sh
 
 # ranks per node
 rpn=4
@@ -66,7 +68,7 @@ mpiexec -np $((rpn*nnodes)) \
 	--cpu-bind numa \
 	--no-vni \
 	-genvall \
-	$HOME/${USER}_cont/src/dfs-write
+	/tmp/${DAOS_POOL}/${DAOS_CONT}/daos/src/dfs-write
 
 echo "read"
 mpiexec -np $((rpn*nnodes)) \
@@ -75,6 +77,6 @@ mpiexec -np $((rpn*nnodes)) \
 	--cpu-bind numa \
 	--no-vni \
 	-genvall \
-	$HOME/${USER}_cont/src/dfs-read
+	/tmp/${DAOS_POOL}/${DAOS_CONT}/daos/src/dfs-read
 
 exit 0

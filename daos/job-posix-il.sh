@@ -1,10 +1,13 @@
 #!/bin/bash
-#PBS -A Aurora_deployment
+#PBS -A ATPESC2025
 #PBS -lselect=1
 #PBS -lwalltime=30:00
 #PBS -k doe
+#PBS -lfilesystems=home:daos_user_fs
 #
 # Test case for POSIX intercept library
+#
+# qsub -v DAOS_POOL=ATPESC2025,DAOS_CONT=${USER}_cont ./job-posix-il.sh
 
 # ranks per node
 rpn=4
@@ -65,8 +68,8 @@ mpiexec -np $((rpn*nnodes)) \
 	--cpu-bind numa \
 	--no-vni \
 	-genvall \
-	-env LD_PRELOAD=$DAOS_PRELOAD \ # use intercept library
-	$HOME/${USER}_cont/hands-on/posix-write
+	-env LD_PRELOAD=$DAOS_PRELOAD \
+	/tmp/${DAOS_POOL}/${DAOS_CONT}/daos/src/posix-write
 
 echo "read"
 mpiexec -np $((rpn*nnodes)) \
@@ -75,7 +78,7 @@ mpiexec -np $((rpn*nnodes)) \
 	--cpu-bind numa \
 	--no-vni \
 	-genvall \
-	-env LD_PRELOAD=$DAOS_PRELOAD \ # user intercept library
-	$HOME/${USER}_cont/hands-on/posix-read
+	-env LD_PRELOAD=$DAOS_PRELOAD \
+	/tmp/${DAOS_POOL}/${DAOS_CONT}/daos/src/posix-read
 
 exit 0
