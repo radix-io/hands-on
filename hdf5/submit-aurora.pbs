@@ -1,0 +1,34 @@
+#!/bin/bash
+#PBS -l select=1
+#PBS -A radix-io
+#PBS -l walltime=00:15:00
+#PBS -N array-io
+#PBS -k doe
+#PBS -j oe
+#PBS -l filesystems=flare:daos_user_fs
+#PBS -V
+
+set -uo pipefail
+
+cd ${PBS_O_WORKDIR}
+
+NNODES=`wc -l < $PBS_NODEFILE`
+NRANKS=4        # Number of MPI ranks per node
+NDEPTH=1        # Number of hardware threads per rank, spacing between MPI ranks on a node
+NTOTRANKS=$(( NNODES * NRANKS ))
+
+cd $PBS_O_WORKDIR
+
+export DAOS_POOL=radix-io
+#export DAOS_POOL=a3a2b094-fe69-4ef2-b715-d229bfd5a76e
+export DAOS_CONT=simple-hdf5
+
+# HDF5 vol seems unable to actually resolve from unified namespace any longer?
+#launch-dfuse.sh ${DAOS_POOL}:${DAOS_CONT}
+export HDF5_DAOS_BYPASS_DUNS=1
+
+export LD_LIBRARY_PATH=${HOME}/soft/hdf5/lib:${LD_LIBRARY_PATH}
+export HDF5_VOL_CONNECTOR=daos
+export HDF5_PLUGIN_PATH=${HOME}/soft//vol-daos/lib/
+mpiexec -np ${NTOTRANKS} -ppn ${NRANKS} --no-vni  \
+	./h5par_ex1a ${DAOS_CONT}
