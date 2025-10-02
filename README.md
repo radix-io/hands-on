@@ -7,6 +7,7 @@
 - [Array](#array)
 - [Variance](#variance)
 - [Parallel-NetCDF](#parallel-netcdf)
+- [HDF5](#hdf5)
 - [Game of Life](#game-of-life)
 - [Sparse Matrix](#sparse-matrix)
 
@@ -186,6 +187,10 @@ also explore attributes.
   attribute on the data set.  You won't need to define any dimensions or
   variables. (If you need to cheat, look at the example C files above).
 * What happens if you define different attributes on different processors?
+
+## HDF5
+
+Lots of sample code to draw from at https://github.com/HDFGroup/hdf5-examples/
 
 ## Game of Life
 
