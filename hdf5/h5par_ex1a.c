@@ -16,6 +16,18 @@
 /* Global variables */
 double write_buf[DIM0];
 
+#if 0
+resulting daaset looks like this:
+HDF5 "/lus/flare/projects/radix-io/robl/hdf5/simple-hdf5.h5" {
+GROUP "/" {
+   DATASET "Dataset 1" {
+      DATATYPE  H5T_IEEE_F64LE
+      DATASPACE  SIMPLE { ( 230000, 4 ) / ( 230000, 4 ) }
+   }
+}
+}
+#endif
+
 int main(int argc, char *argv[])
 {
     hid_t file_id;              /* File ID */
@@ -54,7 +66,7 @@ printf("my rank = %d (%d)\n", mpi_rank, mpi_size);
     assert(ret >= 0);
 
     /* Create the file collectively */
-    file_id = H5Fcreate(FILENAME, H5F_ACC_TRUNC, H5P_DEFAULT, fapl_id);
+    file_id = H5Fcreate(argv[1], H5F_ACC_TRUNC, H5P_DEFAULT, fapl_id);
     assert(file_id > 0);
 
     /* Release file access property list */

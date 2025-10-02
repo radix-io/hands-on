@@ -18,7 +18,7 @@ NTOTRANKS=$(( NNODES * NRANKS ))
 module load daos_perf
 
 DAOS_POOL=radix-io
-DAOS_CONT=segments-test
+DAOS_CONT=segments-test2
 
 daos container destroy $DAOS_POOL $DAOS_CONT
 daos container create --type POSIX $DAOS_POOL $DAOS_CONT

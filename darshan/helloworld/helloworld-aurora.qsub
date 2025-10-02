@@ -18,7 +18,10 @@ lfs setstripe -c -1 $SCRATCHDIR
 rm -rf $SCRATCHDIR/helloworld
 
 # submit job
-mpiexec -n 408 --ppn 102 --cpu-bind core ./helloworld $SCRATCHDIR
+export ROMIO_HINTS=romio_hints
+export ROMIO_PRINT_HINTS=1
+binding="list:4:56:5:57:6:58:7:59:8:60:9:61:10:62:11:63:12:64:13:65:14:66:15:67:16:68:17:69:18:70:19:71:20:72:21:73:22:74:23:75:24:76:25:77:26:78:27:79:28:80:29:81:30:82:31:83:32:84:33:85:34:86:35:87:36:88:37:89:38:90:39:91:40:92:41:93:42:94:43:95:44:96:45:97:46:98:47:99:48:100:49:101:50:102:51:103:1:53:2:54:3:55"
+mpiexec -n 408 --ppn 102 --cpu-bind ${binding} ./helloworld $SCRATCHDIR
 
 # delete the new file to avoid exhausing the ATPESC quota
 rm -rf $SCRATCHDIR/helloworld

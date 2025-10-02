@@ -70,7 +70,7 @@ mpiexec -np $((rpn*nnodes)) \
 	--cpu-bind numa \
 	--no-vni \
 	--genvall \
-	/tmp/${DAOS_POOL}/${DAOS_CONT}/daos/src/posix-write
+	src/posix-write
 
 echo "read"
 mpiexec -np $((rpn*nnodes)) \
@@ -79,6 +79,6 @@ mpiexec -np $((rpn*nnodes)) \
 	--cpu-bind numa \
 	--no-vni \
 	--genvall \
-	/tmp/${DAOS_POOL}/${DAOS_CONT}/daos/src/posix-read
+	src/posix-read
 
 exit 0
