@@ -40,14 +40,14 @@ binding="list:4:56:5:57:6:58:7:59:8:60:9:61:10:62:11:63:12:64:13:65:14:66:15:67:
 export LD_PRELOAD=${DARSHAN_RUNTIME_ROOT}/lib/libdarshan.so
 
 # collective i/o:
-#mpiexec -n ${NTOTRANKS} --ppn ${NRANKS} --no-vni --envall -cpu-bind ${binding} \
-#	ior -c --mpiio.useStridedDatatype --mpiio.useFileView -w -f ${PBS_O_WORKDIR}/noncontig.conf -o daos:/tmp/${DAOS_POOL}/${DAOS_CONT}/ior-noncontig-coll.out > daos-collective.out
+mpiexec -n ${NTOTRANKS} --ppn ${NRANKS} --no-vni --envall -cpu-bind ${binding} \
+	ior -c --mpiio.useStridedDatatype --mpiio.useFileView -w -f ${PBS_O_WORKDIR}/noncontig.conf -o daos:/tmp/${DAOS_POOL}/${DAOS_CONT}/ior-noncontig-coll.out > daos-collective.out
 
 # collective I/O with tuning
 # if we ask for more aggregators-per-node we can potentially use more network links and see higher performance
-#export IOR_HINT__MPI__cb_config_list="*:8"
-#mpiexec -n ${NTOTRANKS} --ppn ${NRANKS} --no-vni --envall -cpu-bind ${binding} \
-#	ior -c --mpiio.useStridedDatatype --mpiio.useFileView -w -f ${PBS_O_WORKDIR}/noncontig.conf -o daos:/tmp/${DAOS_POOL}/${DAOS_CONT}/ior-noncontig-coll.out > daos-collective-tuned.out
+export IOR_HINT__MPI__cb_config_list="*:8"
+mpiexec -n ${NTOTRANKS} --ppn ${NRANKS} --no-vni --envall -cpu-bind ${binding} \
+	ior -c --mpiio.useStridedDatatype --mpiio.useFileView -w -f ${PBS_O_WORKDIR}/noncontig.conf -o daos:/tmp/${DAOS_POOL}/${DAOS_CONT}/ior-noncontig-coll.out > daos-collective-tuned.out
 
 # independent i/o (should use daos's list-io)
 mpiexec -n ${NTOTRANKS} --ppn ${NRANKS} --no-vni --envall -cpu-bind ${binding} \
