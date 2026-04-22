@@ -9,13 +9,23 @@ import torchvision.models as models
 
 from torch.nn.parallel import DistributedDataParallel as DDP
 
-CHECKPOINT_DIR = "checkpoint/vis"
+CHECKPOINT_DIR = "/lus/flare/projects/radix-io/robl/checkpoint/vis/"
+
+if torch.cuda.is_available():
+    DEVICE = torch.device('cuda')
+    BACKEND = "nccl"
+elif torch.xpu.is_available():
+    DEVICE = torch.device('xpu')
+    BACKEND = "xccl"
+else:
+    DEVICE = torch.device('cpu')
+    BACKEND = "gloo"
 
 
 def setup(rank, world_size):
-    # initialize the process group
-    dist.init_process_group("nccl", rank=rank, world_size=world_size)
-    torch.cuda.set_device(rank)
+    dist.init_process_group(BACKEND, rank=rank, world_size=world_size)
+    if DEVICE.type != "cpu":
+        getattr(torch, DEVICE.type).set_device(rank)
 
 
 def cleanup():
@@ -26,8 +36,10 @@ def run_ddp_checkpoint_save_example(rank, world_size):
     print(f"Running DDP checkpoint saving example on rank {rank}.")
     setup(rank, world_size)
 
+    device = torch.device(DEVICE.type, rank)
+
     # create a pre-trained Vision Transformer (Huge) model and move it to GPU
-    model = models.vit_h_14(weights=models.ViT_H_14_Weights.DEFAULT).to(rank)
+    model = models.vit_h_14(weights=models.ViT_H_14_Weights.DEFAULT).to(device)
 
     # Wrap the model with DDP
     model = DDP(model, device_ids=[rank])
@@ -36,7 +48,7 @@ def run_ddp_checkpoint_save_example(rank, world_size):
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
     # Create a dummy input tensor that ViT-H/14 expects
-    dummy_input = torch.rand(2, 3, 518, 518, device="cuda")
+    dummy_input = torch.rand(2, 3, 518, 518, device=device)
 
     start_time = time.time()
 
@@ -66,7 +78,7 @@ def run_ddp_checkpoint_save_example(rank, world_size):
 
 
 if __name__ == "__main__":
-    world_size = torch.cuda.device_count()
+    world_size = getattr(torch, DEVICE.type).device_count()
     print(f"Running DDP checkpoint example on {world_size} devices.")
     mp.spawn(
         run_ddp_checkpoint_save_example,
