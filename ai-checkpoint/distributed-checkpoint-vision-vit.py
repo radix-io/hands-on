@@ -12,8 +12,22 @@ from torch.distributed.fsdp import fully_shard
 from torch.distributed.checkpoint.state_dict import get_state_dict, set_state_dict
 from torch.distributed.checkpoint.stateful import Stateful
 
-CHECKPOINT_DIR = "checkpoint/vis-sync"
+# intel frameworks has torch version 2.10.0a0+git449b176 with a warning about
+# TypeStorage.  We can't do anything about that in this script, though...
+import warnings
+warnings.filterwarnings("ignore", message="TypedStorage is deprecated", category=UserWarning)
 
+CHECKPOINT_DIR = "/lus/flare/projects/radix-io/robl/checkpoint/vis-sync"
+
+if torch.cuda.is_available():
+    DEVICE = torch.device('cuda')
+    BACKEND = "nccl"
+elif torch.xpu.is_available():
+    DEVICE = torch.device('xpu')
+    BACKEND = "xccl"
+else:
+    DEVICE = torch.device('cpu')
+    BACKEND = "gloo"
 
 class AppState(Stateful):
     """This is a useful wrapper for checkpointing the Application State. Since this object is compliant
@@ -48,8 +62,9 @@ class AppState(Stateful):
 
 def setup(rank, world_size):
     # initialize the process group
-    dist.init_process_group("nccl", rank=rank, world_size=world_size)
-    torch.cuda.set_device(rank)
+    dist.init_process_group(BACKEND, rank=rank, world_size=world_size)
+    if DEVICE.type != "cpu":
+        getattr(torch, DEVICE.type).set_device(rank)
 
 
 def cleanup():
@@ -70,7 +85,8 @@ def run_fsdp_checkpoint_save_example(rank, world_size):
 
     # Create a dummy input tensor that ViT-H/14 expects (batch_size, channels, height, width)
     # The default input size for this specific model variant is 518x518.
-    dummy_input = torch.rand(2, 3, 518, 518, device="cuda")
+    d = torch.device(DEVICE.type, rank)
+    dummy_input = torch.rand(2, 3, 518, 518, device=d)
 
     start_time = time.time()
 
@@ -91,7 +107,7 @@ def run_fsdp_checkpoint_save_example(rank, world_size):
 
 
 if __name__ == "__main__":
-    world_size = torch.cuda.device_count()
+    world_size = getattr(torch, DEVICE.type).device_count()
     print(f"Running sync checkpoint example on {world_size} devices.")
     mp.spawn(
         run_fsdp_checkpoint_save_example,

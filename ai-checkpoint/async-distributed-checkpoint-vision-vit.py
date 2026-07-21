@@ -12,8 +12,17 @@ from torch.distributed.fsdp import fully_shard
 from torch.distributed.checkpoint.state_dict import get_state_dict, set_state_dict
 from torch.distributed.checkpoint.stateful import Stateful
 
-CHECKPOINT_DIR = "checkpoint/vis-async"
+CHECKPOINT_DIR = "/lus/flare/projects/radix-io/robl/checkpoint/vis-async"
 
+if torch.cuda.is_available():
+    DEVICE = torch.device('cuda')
+    BACKEND = "nccl"
+elif torch.xpu.is_available():
+    DEVICE = torch.device('xpu')
+    BACKEND = "xccl"
+else:
+    DEVICE = torch.device('cpu')
+    BACKEND = "gloo"
 
 class AppState(Stateful):
     """This is a useful wrapper for checkpointing the Application State. Since this object is compliant
@@ -48,9 +57,9 @@ class AppState(Stateful):
 
 def setup(rank, world_size):
     # initialize the process group
-    dist.init_process_group("cpu:gloo,cuda:nccl", rank=rank, world_size=world_size)
-    torch.cuda.set_device(rank)
-
+    dist.init_process_group("cpu:gloo,"+DEVICE.type + ":" + BACKEND, rank=rank, world_size=world_size)
+    if DEVICE.type != "cpu":
+        getattr(torch, DEVICE.type).set_device(rank)
 
 def cleanup():
     dist.destroy_process_group()
@@ -62,7 +71,7 @@ def run_fsdp_checkpoint_save_example(rank, world_size):
 
     # create a pre-trained Vision Transformer (Huge) model and move it to GPU
     # The vit_h_14 model has over 600 million parameters.
-    model = models.vit_h_14(weights=models.ViT_H_14_Weights.DEFAULT).to(rank)
+    model = models.vit_h_14(weights=models.ViT_H_14_Weights.DEFAULT).to(torch.device(DEVICE.type, rank))
     model = fully_shard(model)
 
     # Adjust the optimizer to use the model's parameters
@@ -70,7 +79,8 @@ def run_fsdp_checkpoint_save_example(rank, world_size):
 
     # Create a dummy input tensor that ViT-H/14 expects (batch_size, channels, height, width)
     # The default input size for this specific model variant is 518x518.
-    dummy_input = torch.rand(2, 3, 518, 518, device="cuda")
+    d = torch.device(DEVICE.type, rank)
+    dummy_input = torch.rand(2, 3, 518, 518, device=d)
 
     start_time = time.time()
 
@@ -85,7 +95,13 @@ def run_fsdp_checkpoint_save_example(rank, world_size):
             checkpoint_future.result()
 
         state_dict = { "app": AppState(model, optimizer) }
-        checkpoint_future = dcp.async_save(state_dict, checkpoint_id=f"{CHECKPOINT_DIR}_step{step}")
+        checkpoint_future = dcp.async_save(
+            state_dict,
+            storage_writer=dcp.FileSystemWriter(f"{CHECKPOINT_DIR}_step{step}", overwrite=True),
+        )
+
+    if checkpoint_future is not None:
+        checkpoint_future.result()
 
     end_time = time.time()
     elapsed_time = end_time - start_time
@@ -96,7 +112,7 @@ def run_fsdp_checkpoint_save_example(rank, world_size):
 
 
 if __name__ == "__main__":
-    world_size = torch.cuda.device_count()
+    world_size = getattr(torch, DEVICE.type).device_count()
     print(f"Running async checkpoint example on {world_size} devices.")
     mp.spawn(
         run_fsdp_checkpoint_save_example,
