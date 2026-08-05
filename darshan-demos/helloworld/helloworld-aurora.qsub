@@ -1,15 +1,15 @@
 #!/bin/bash
 #PBS -l select=4
 #PBS -l place=scatter
-#PBS -l filesystems=home:flare
-#PBS -l walltime=0:15:00
-#PBS -A ATPESC2025
+#PBS -l filesystems=home:flare:daos_user_fs
+#PBS -l walltime=0:10:00
+#PBS -A ATPESC2026
 #PBS -q ATPESC
 
 cd ${PBS_O_WORKDIR}
 
 # make sure scratch dir exists
-SCRATCHDIR=/flare/ATPESC2025/usr/$USER
+SCRATCHDIR=/flare/ATPESC2026/usr/$USER
 mkdir -p $SCRATCHDIR
 # set striping parameters to use all servers
 lfs setstripe -c -1 $SCRATCHDIR
@@ -17,11 +17,35 @@ lfs setstripe -c -1 $SCRATCHDIR
 # delete old file if present
 rm -rf $SCRATCHDIR/helloworld
 
-# submit job
-export ROMIO_HINTS=romio_hints
-export ROMIO_PRINT_HINTS=1
-binding="list:4:56:5:57:6:58:7:59:8:60:9:61:10:62:11:63:12:64:13:65:14:66:15:67:16:68:17:69:18:70:19:71:20:72:21:73:22:74:23:75:24:76:25:77:26:78:27:79:28:80:29:81:30:82:31:83:32:84:33:85:34:86:35:87:36:88:37:89:38:90:39:91:40:92:41:93:42:94:43:95:44:96:45:97:46:98:47:99:48:100:49:101:50:102:51:103:1:53:2:54:3:55"
-mpiexec -n 408 --ppn 102 --cpu-bind ${binding} ./helloworld $SCRATCHDIR
+NNODES=`wc -l < $PBS_NODEFILE`
+PROCS_PER_NODE=8   # Number of MPI ranks per node
+NDEPTH=1            # Number of hardware threads per rank, spacing between MPI ranks on a node
+NTOTRANKS=$(( NNODES * PROCS_PER_NODE ))
 
+# most sites store darshan logs in a YYYY/MM/DD directory heirachy, and set up
+# the environment so everyone's jobs put logs there.  Aurora is not set up that
+# way right now, and instead defaults to putting logs in your HOME.  let's put
+# the log file here next to the executable
+export DARSHAN_LOG_DIR_PATH=`pwd`
+
+# submit job
+# this job binding is not important for the limited amount of I/O done for this
+# "hello world" example but you'll want something like this for any non-trivial
+# I/O application.  It sets up the processes on the Aurora nodes in such a way
+# that all 8 netowrk cards get used for I/O transfers
+
+binding="list:4:56:5:57:6:58:7:59:8:60:9:61:10:62:11:63:12:64:13:65:14:66:15:67:16:68:17:69:18:70:19:71:20:72:21:73:22:74:23:75:24:76:25:77:26:78:27:79:28:80:29:81:30:82:31:83:32:84:33:85:34:86:35:87:36:88:37:89:38:90:39:91:40:92:41:93:42:94:43:95:44:96:45:97:46:98:47:99:48:100:49:101:50:102:51:103:1:53:2:54:3:55"
+mpiexec -n $NTOTRANKS --ppn $PROCS_PER_NODE  --cpu-bind ${binding} ./helloworld $SCRATCHDIR
 # delete the new file to avoid exhausing the ATPESC quota
 rm -rf $SCRATCHDIR/helloworld
+
+
+# using DAOS won't require any code changes; just a few lines to set it up
+module use /soft/modulefiles
+module load daos
+export DAOS_POOL=radix-io
+export DAOS_CONT=hello-${USER}
+daos container create --type POSIX $DAOS_POOL $DAOS_CONT || true
+launch-dfuse.sh ${DAOS_POOL}:${DAOS_CONT}
+# 'vni' is a permissions model we have to temporarily disable for DAOS
+mpiexec -n $NTOTRANKS --ppn $PROCS_PER_NODE  --cpu-bind ${binding} --no-vni ./helloworld /tmp/${DAOS_POOL}/${DAOS_CONT}
