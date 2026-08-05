@@ -25,6 +25,7 @@ module list
 export DAOS_POOL=radix-io
 export DAOS_CONT=simple-hdf5
 
+#daos container create --type=POSIX ${DAOS_POOL} ${DAOS_CONT} || true
 daos container create --type=POSIX ${DAOS_POOL} ${DAOS_CONT} || true
 
 launch-dfuse.sh ${DAOS_POOL}:${DAOS_CONT}

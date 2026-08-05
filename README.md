@@ -1,4 +1,4 @@
-# ATPESC 2025 hands-on I/O exercises and reference material
+# ATPESC 2026 hands-on I/O exercises and reference material
 
 # Table of Contents:
 - [Reservation](#reservation)
@@ -11,14 +11,14 @@
 - [Game of Life](#game-of-life)
 - [Sparse Matrix](#sparse-matrix)
 
-This is the documentation for the hands-on exercises in the ``Track 7: Data
-Intensive Computing and I/O'' portion of ATPESC 2025.  Agenda information
+This is the documentation for the hands-on exercises in the ``Track 9: Data
+Intensive Computing and I/O'' portion of ATPESC 2026.  Agenda information
 can be found here:
 
-[ATPESC 2025 Track 7 agenda](https://extremecomputingtraining.anl.gov/agenda-2025/#Track-7)
+[ATPESC 2026 Track 9 agenda](https://extremecomputingtraining.anl.gov/2026-agenda)
 
 We will describe these exercises in greater detail during the ATPESC
-lectures and provide hands-on support via the #io channel in Slack.  Feel
+lectures and provide hands-on support via the #atpesc-2026-track-9-io  channel in Slack.  Feel
 free to ask us questions about your own code as well.
 
 The attendees are required to have a laptop with a working web browser and
@@ -27,27 +27,23 @@ via an SSH terminal.
 
 ## Reservations and file storage locations
 
-ATPESC 2025 attendees will have access to reservations on both the Aurora and
-Polaris systems from 9am to 9pm CT to execute hands-on exercises as part of the
+ATPESC 2026 attendees will have access to reservations on the Aurora
+systems from 9am to 9pm CT to execute hands-on exercises as part of the
 I/O track:
 * Aurora (preferred): 9AM-9PM 512 nodes QUEUE: ATPESC
-* Polaris: 9AM-9PM 300 nodes QUEUE: ATPESC
 
-Submit your jobs to our reservation using the the `ATPESC2025`
-allocation and the `ATPESC` queue (`-A ATPESC2025` and `-q ATPESC` options,
+Submit your jobs to our reservation using the the `ATPESC2026`
+allocation and the `ATPESC` queue (`-A ATPESC2026` and `-q ATPESC` options,
 respectively, in your job script or qsub command line).
 
-You can store data in the `/flare/ATPESC2025/` directory on Aurora or the
-`/eagle/ATPESC2025/` directory on Polaris.  Please create subdirectories based
-on your username to avoid conflicts with other ATPESC attendees.  Users on Aurora also have access to a DAOS storage pool as well, which will be covered during the DAOS session.
-
-Note that Aurora and Polaris use separate file systems, so if you wish to move
-data between the two you must use Globus or scp to copy data.
+You can store data in the `/flare/ATPESC2026/` directory on Aurora.
+Please create subdirectories based
+on your username to avoid conflicts with other ATPESC attendees.  Users also have access to a DAOS storage pool as well.
 
 ## Initial setup (ALCF Aurora)
 
-Note that Aurora is the preferred platform for ATPESC 2025 exercises, but you
-are also welcome to use Polaris.  Note that DAOS is only available on Aurora.
+Note that Aurora is the preferred platform for ATPESC 2026 exercises.
+Note that DAOS is only available on Aurora.
 
 * Confirm account access if you haven't already (see presenters for
 details)
@@ -59,22 +55,6 @@ details)
   * `cd hands-on`
 * Set up your environment to have access to the utilities needed for the hands-on exercises
   * `source ./aurora-setup-env.sh`
-
-## Initial setup (ALCF Polaris)
-
-Note that Aurora is the preferred platform for ATPESC 2025 exercises, but you
-are also welcome to use Polaris.  Note that DAOS is only available on Aurora.
-
-* Confirm account access if you haven't already (see presenters for
-details)
-* Log on to Polaris
-* Download the tutorial materials to your home directory.
-  * `mkdir atpesc-io`
-  * `cd atpesc-io`
-  * `git clone https://github.com/radix-io/hands-on.git`
-  * `cd hands-on`
-* Set up your environment to have access to the utilities needed for the hands-on exercises
-  * `source ./polaris-setup-env.sh`
 
 ## Darshan
 
@@ -90,8 +70,7 @@ details on specific example programs)
   * `qsub ./<exampleprogram>-aurora.qsub`
 * Check the queue to see when your jobs complete
   * `qstat |grep <username>`
-* Look for log files in ` /lus/flare/logs/darshan/aurora/2025/8/8/<username>*` (or whatever the current day is in UTC)
-  * Copy log files to your home directory
+* Look for log files in your home directory
 * Use the PyDarshan job summary tool or `darshan-parser` to investigate Darshan
 characterization data
   * `python -m darshan summary <log_path>` command will produce \*.html files with an analysis summary

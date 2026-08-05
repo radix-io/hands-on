@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -l select=1
 #PBS -l daos=default
-#PBS -A ATPESC2025
+#PBS -A ATPESC2026
 #PBS -l walltime=00:15:00
 #PBS -N array-io
 #PBS -k doe
@@ -27,7 +27,7 @@ cd $PBS_O_WORKDIR
 export PATH=.:${PATH}
 
 # Everyone will use this pool (a collection of daos servers)
-DAOS_POOL=ATPESC2025
+DAOS_POOL=ATPESC2026
 # inside that pool, everyone will create their own containers for applications
 # or demonstrations
 DAOS_CONT=${USER}-array

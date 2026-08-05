@@ -5,7 +5,6 @@
 #PBS -l filesystems=flare:daos_user_fs
 #PBS -q alcf_training
 #PBS -N hello-hdf5
-#PBS -V
 
 set -euo pipefail
 cd ${PBS_O_WORKDIR}

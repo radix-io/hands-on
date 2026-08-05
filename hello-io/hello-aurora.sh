@@ -1,12 +1,11 @@
 #!/bin/bash
 #PBS -l select=1
-#PBS -A ATPESC2025
+#PBS -A ATPESC2026
 #PBS -l walltime=00:15:00
 #PBS -N hello-io
 #PBS -k doe
 #PBS -j oe
 #PBS -l filesystems=flare:daos_user_fs
-#PBS -V
 
 cd ${PBS_O_WORKDIR}
 
@@ -17,7 +16,7 @@ NTOTRANKS=$(( NNODES * NRANKS ))
 
 
 # Everyone will use this pool (a collection of daos servers)
-DAOS_POOL=alcf_training
+DAOS_POOL=ATPESC2026
 # inside that pool, everyone will create their own containers for applications
 # or demonstrations
 DAOS_CONT=${USER}-hello

@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -l select=2
-#PBS -A ATPESC2025
+#PBS -A ATPESC2026
 #PBS -l walltime=00:15:00
 #PBS -N ior-pnetcdf
 #PBS -k doe
@@ -28,7 +28,7 @@ binding="list:4:56:5:57:6:58:7:59:8:60:9:61:10:62:11:63:12:64:13:65:14:66:15:67:
 # experiment: collect DXT traces of collective I/O and pnetcdf
 export DXT_ENABLE_IO_TRACE=1
 
-DAOS_POOL=ATPESC2025
+DAOS_POOL=ATPESC2026
 DAOS_CONT=ior-pnetcdf
 
 daos container destroy $DAOS_POOL $DAOS_CONT

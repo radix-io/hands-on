@@ -1,12 +1,12 @@
 #!/bin/bash
 #PBS -l select=1
 #PBS -l daos=perf
-#PBS -A ATPESC2025
+#PBS -A ATPESC2026
 #PBS -l walltime=00:15:00
 #PBS -N array-io
 #PBS -k doe
 #PBS -j oe
-#PBS -l filesystems=flare:daos_perf_fs
+#PBS -l filesystems=flare:daos_user_fs
 #PBS -V
 
 # your environment when you submit this script is what the script will see --
@@ -23,9 +23,9 @@ NTOTRANKS=$(( NNODES * NRANKS ))
 IOR=${HOME}/soft/ior
 PATH=${IOR}/bin:${PATH}
 
-module load daos_perf
+module load daos
 # Everyone will use this pool (a collection of daos servers)
-DAOS_POOL=ATPESC2025_0
+DAOS_POOL=ATPESC2026
 # inside that pool, everyone will create their own containers for applications
 # or demonstrations
 DAOS_CONT=${USER}-ior-simple
@@ -36,7 +36,7 @@ if ! $(daos container query $DAOS_POOL $DAOS_CONT >/dev/null 2>&1) ; then
 	daos container create --type POSIX $DAOS_POOL $DAOS_CONT
 fi
 
-launch-dfuse_perf.sh ${DAOS_POOL}:${DAOS_CONT}
+launch-dfuse.sh ${DAOS_POOL}:${DAOS_CONT}
 
 
 
