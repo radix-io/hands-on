@@ -13,7 +13,9 @@ CTORTF=../mpi2tutorial/maint/ctortf
 PROGRAMS= h5par_ex1a h5par_ex1b h5par_ex1c \
 	  h5par_ex2a h5par_ex2b
 
-all: $(PROGRAMS)
+BENCH_PROGRAMS= BENCH_register BENCH_minifloat
+
+all: $(PROGRAMS) $(BENCH_PROGRAMS)
 
 examples: array.rtf mpi-util.rtf \
 	1-description.rtf 2-posix.rtf 3-master.rtf \
@@ -42,8 +44,14 @@ h5par-comparison:  h5par-comparison.c
 	$(MPICC) $(CFLAGS) $(CPPFLAGS) -DUSE_COLL_DATA $^ -o h5par-comparison-collio $(LDFLAGS) -lhdf5
 	$(MPICC) $(CFLAGS) $(CPPFLAGS) -DUSE_COLL_DATA -DUSE_COLL_MD $^ -o h5par-comparison-collmd $(LDFLAGS) -lhdf5
 
+BENCH_register: BENCH_register.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS) -lhdf5 -lm
+
+BENCH_minifloat: BENCH_minifloat.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS) -lhdf5 -lm
+
 clean:
-	rm -f *.o *.rtf *.nc $(PROGRAMS)
+	rm -f *.o *.rtf *.nc $(PROGRAMS) $(BENCH_PROGRAMS)
 
 # OK to ignore: used to generate syntax-highlighted code fragments for
 # presentation
